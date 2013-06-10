@@ -1,0 +1,14 @@
+= form_for task do |form|
+  %fieldset
+    = form.label :title
+    = form.text_field :title
+  %fieldset
+    = form.label :description
+    = form.text_area :description
+  %fieldset
+    = form.label :tags
+    = form.text_field :tags
+  %footer
+    = form.submit 'Save'
+    = link_to 'Cancel', (action_name == 'new') ? root_url : task_path(task)
+    
