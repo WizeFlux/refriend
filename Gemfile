@@ -10,7 +10,7 @@ gem 'sass-rails', '~> 4.0.0.rc1'
 gem 'angularjs-rails'
 gem 'underscore-rails'
 gem 'vkontakte_api'
-
+gem "mongoid-simple-tags"
 gem 'jbuilder', '~> 1.0.1'
 
 group :doc do

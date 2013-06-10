@@ -5,19 +5,21 @@ CitySelector = function($scope) {
   
   $scope.allCities = [{
     title: 'All cities',
-    cid: 'all'
+    cid: 'all',
+    selected: function(){  return currentPersonCid == 'all'  }.call()
   }];
   
   VK.api("places.getCityById", {cids: currentPersonCid}, function(data) {
     $scope.$apply(function(){
-      debugger
-      $scope.preloadedCity = data.response;
-      $scope.preloadedCity[0].selected = true;
+      $scope.preloadedCity = [{
+        title: data.response[0].name,
+        cid: data.response[0].cid,
+        selected: true
+      }];
     });
   });
   
   $scope.$watch('search', function(newValue, oldValue){  $scope.loadCities();  });
-  
   
   $scope.cities = function() {
     return $scope.allCities.concat(  $scope.preloadedCity, $scope.loadedCities  )
