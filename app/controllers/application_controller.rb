@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   
   
   def set_headers
-    response.headers['X-FRAME-OPTIONS'] = nil
+    response.headers.delete('X-Frame-Options')
   end
   
   def current_person_cid
