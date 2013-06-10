@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   
   
   def set_headers
-    response.headers['X-FRAME-OPTIONS'] = 'ALLOW-FROM http://vk.com'
+    response.headers['X-FRAME-OPTIONS'] = nil
   end
   
   def current_person_cid
