@@ -13,6 +13,11 @@ gem 'vkontakte_api'
 gem "mongoid-simple-tags"
 gem 'jbuilder', '~> 1.0.1'
 
+#front-end
+group :assets do
+  gem 'compass-rails'
+end
+
 # deploy
 gem 'unicorn'
 gem 'capistrano'
