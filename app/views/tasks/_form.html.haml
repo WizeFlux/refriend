@@ -9,12 +9,12 @@
     = form.label :tag_list
     = form.text_field :tag_list
   %fieldset{'ng-controller' => 'CitySelector', 'ng-init' => "preloadCity('#{task.cid || current_person_cid}')"}
+    = form.label 'City'
     %input{'type' => 'search', 'ng-model' => 'search', 'ng-show' => 'displaySearch()'}
     %ul
       %li{'ng-repeat' => 'city in cities()', 'ng-hide' => 'hide(city)'}
         %input{'type' => 'checkbox', 'ng-model' => 'city.selected', 'id' => '{{city.cid}}', 'name' => 'task[cid]', 'value' => '{{city.cid}}'}
         %label{'for' => '{{city.cid}}'} {{city.title}} {{city.region}} {{city.area}}
-  %footer
-    = form.submit 'Save'
-    = link_to 'Cancel', (action_name == 'new') ? root_url : task_path(task)
-    
+  %footer.form
+    = form.submit 'Опубликовать', class: 'submit'
+    = link_to 'Вернуться к списку объявлений', (action_name == 'new') ? root_url : task_path(task), class: 'back'
