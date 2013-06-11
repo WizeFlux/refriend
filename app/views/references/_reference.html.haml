@@ -1,17 +1,17 @@
-%section
+%section{'ng-controller' => 'People'}
 
   %span
     %img{src: "{{person(#{reference.referencer_uid}).photo}}"}
     {{person(#{reference.referencer_uid}).first_name}}
     {{person(#{reference.referencer_uid}).nickname}}
     {{person(#{reference.referencer_uid}).last_name}}
-  
-  Recommends
-  %span
-    %img{src: "{{person(#{reference.referenced_uid}).photo}}"}
-    {{person(#{reference.referenced_uid}).first_name}}
-    {{person(#{reference.referenced_uid}).nickname}}
-    {{person(#{reference.referenced_uid}).last_name}}
+  - unless reference.referencer_uid == reference.referenced_uid
+    Recommends
+    %span
+      %img{src: "{{person(#{reference.referenced_uid}).photo}}"}
+      {{person(#{reference.referenced_uid}).first_name}}
+      {{person(#{reference.referenced_uid}).nickname}}
+      {{person(#{reference.referenced_uid}).last_name}}
 
   %p
     = reference.description

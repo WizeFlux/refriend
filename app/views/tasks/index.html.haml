@@ -8,14 +8,5 @@
     
 %hr
 - @tasks.each do |task|
-  %section{'ng-controller' => 'People'}
-    %h3= link_to task.title, task_path(task)
-    %p
-      %img{src: "{{person(#{task.requester_uid}).photo}}"}
-      {{person(#{task.requester_uid}).first_name}} {{person(#{task.requester_uid}).nickname}} {{person(#{task.requester_uid}).last_name}}
-      
-    %p= task.description
-    %p
-      - task.tags.each do |tag|
-        %i= tag
+  = render 'task', task: task
       

@@ -13,9 +13,11 @@ gem 'vkontakte_api'
 gem "mongoid-simple-tags"
 gem 'jbuilder', '~> 1.0.1'
 
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
+# deploy
+gem 'unicorn'
+gem 'capistrano'
+gem 'rvm-capistrano'
+gem 'capistrano-unicorn'
 
+# development
 gem 'debugger', group: [:development, :test]
