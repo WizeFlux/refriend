@@ -2,16 +2,15 @@
 
   %span
     %img{src: "{{person(#{reference.referencer_uid}).photo}}"}
-    {{person(#{reference.referencer_uid}).first_name}}
-    {{person(#{reference.referencer_uid}).nickname}}
-    {{person(#{reference.referencer_uid}).last_name}}
+    %a{'href' => "http://vk.com/id#{reference.referencer_uid}"}
+      {{person(#{reference.referencer_uid}).first_name}} {{person(#{reference.referencer_uid}).nickname}} {{person(#{reference.referencer_uid}).last_name}}
+
   - unless reference.referencer_uid == reference.referenced_uid
     Recommends
     %span
       %img{src: "{{person(#{reference.referenced_uid}).photo}}"}
-      {{person(#{reference.referenced_uid}).first_name}}
-      {{person(#{reference.referenced_uid}).nickname}}
-      {{person(#{reference.referenced_uid}).last_name}}
+      %a{'href' => "http://vk.com/id#{reference.referenced_uid}"}
+        {{person(#{reference.referenced_uid}).first_name}} {{person(#{reference.referenced_uid}).nickname}} {{person(#{reference.referenced_uid}).last_name}}
 
   %p
     = reference.description

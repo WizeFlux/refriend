@@ -2,7 +2,8 @@
   %h1= link_to task.title, task_path(task)
   %p
     %img{src: "{{person(#{task.requester_uid}).photo}}"}
-    {{person(#{task.requester_uid}).first_name}} {{person(#{task.requester_uid}).nickname}} {{person(#{task.requester_uid}).last_name}}
+    %a{'href' => "http://vk.com/id#{task.requester_uid}"}
+      {{person(#{task.requester_uid}).first_name}} {{person(#{task.requester_uid}).nickname}} {{person(#{task.requester_uid}).last_name}}
     
   
   %p= task.description
