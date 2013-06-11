@@ -1,0 +1,8 @@
+= link_to 'Back to index of tasks', root_path
+%section{'ng-controller' => 'People'}
+  %h1 I recommed
+  - @references.where(referencer_uid: current_person_uid).each do |reference|
+    = render 'reference', reference: reference
+  %h1 I recommeded
+  - @references.where(referenced_uid: current_person_uid).each do |reference|
+    = render 'reference', reference: reference

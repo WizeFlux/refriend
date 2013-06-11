@@ -1,0 +1,21 @@
+%section
+
+  %span
+    %img{src: "{{person(#{reference.referencer_uid}).photo}}"}
+    {{person(#{reference.referencer_uid}).first_name}}
+    {{person(#{reference.referencer_uid}).nickname}}
+    {{person(#{reference.referencer_uid}).last_name}}
+  
+  Recommends
+  %span
+    %img{src: "{{person(#{reference.referenced_uid}).photo}}"}
+    {{person(#{reference.referenced_uid}).first_name}}
+    {{person(#{reference.referenced_uid}).nickname}}
+    {{person(#{reference.referenced_uid}).last_name}}
+
+  %p
+    = reference.description
+    - if reference.referencer_uid == current_person_uid
+      = form_for reference, method: :delete do |form|
+        = form.submit 'Delete'
+%hr
