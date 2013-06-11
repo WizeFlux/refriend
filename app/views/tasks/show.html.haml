@@ -1,14 +1,20 @@
 %section
   %h1= @task.title
   
-  - if @task.requester_uid == current_person_uid
-    = link_to 'Edit', edit_task_path(@task)
     
-  = link_to 'New reference', new_task_reference_path(@task)
-  
+  %menu  
+    = link_to 'New reference', new_task_reference_path(@task)
+    = link_to 'Back to index of tasks', root_path
+    - if @task.requester_uid == current_person_uid
+      = link_to 'Edit', edit_task_path(@task)
+      = form_for @task, method: :delete do |form|
+        = form.submit 'Delete'
   
   %p= @task.description
-  %p= @task.tags
+  %p Views #{@task.views_count}, References #{@task.references.count}, Created at #{@task.created_at}
+  %p
+    - @task.tags.each do |tag|
+      %i= tag
 
   %hr
 

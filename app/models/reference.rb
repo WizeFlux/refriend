@@ -1,5 +1,6 @@
 class Reference
   include Mongoid::Document
+  include Mongoid::Timestamps
   
   field :referencer_uid
   field :referenced_uid

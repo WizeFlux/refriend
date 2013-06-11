@@ -6,11 +6,11 @@
     = form.hidden_field :referenced_uid, value: current_person_uid
     
   %fieldset{'ng-controller' => 'FriendSelect'}
-    %a{'ng-click' => "loadFriends(#{current_person_uid})", 'href' => '#'} Select friend
-    %input{'type' => 'search', 'ng-model' => 'search'}
+    %a{'ng-click' => "loadFriends(#{current_person_uid})", 'href' => '#', 'ng-hide' => 'friends.length > 1'} Select friend
+    %input{'type' => 'search', 'ng-model' => 'search', 'ng-show' => 'displaySearch()'}
     %ul
-      %li{'ng-repeat' => 'friend in friends | filter:search'}
-        = form.radio_button :referenced_uid, '{{friend.uid}}'
+      %li{'ng-repeat' => 'friend in friends | filter:search', 'ng-show' => 'show(friend)'}
+        %input{'type' => 'checkbox', 'name' => 'reference[referenced_uid]', 'ng-model' => 'friend.selected', 'value' => '{{friend.uid}}'}
         %img{src: '{{friend.photo}}'}
         = form.label :referenced_uid, '{{friend.first_name}} {{friend.nickname}} {{friend.last_name}}'
     

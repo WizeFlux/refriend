@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
   end
   
   def current_person_cid
-    if params[:cid]
-      session[:city_id] = params[:cid]
+    if params[:query] && params[:query][:cid]
+      session[:city_id] = params[:query][:cid]
     else
       session[:city_id]
     end
