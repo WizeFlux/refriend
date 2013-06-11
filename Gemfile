@@ -18,6 +18,8 @@ gem 'unicorn'
 gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'capistrano-unicorn'
+gem 'therubyracer', group: [:production]
 
 # development
 gem 'debugger', group: [:development, :test]
+
