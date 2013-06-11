@@ -13,5 +13,5 @@ class Task
   
   def view!;  self.update_attribute(:views_count, views_count + 1);  end
   
-  has_many :references
+  has_many :references, dependent: :destroy
 end
