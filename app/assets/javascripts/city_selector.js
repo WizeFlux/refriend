@@ -20,32 +20,23 @@ CitySelector = function($scope) {
           }];
         });
       });      
-    }
+    };
   };
 
-  $scope.$watch('search', function(newValue, oldValue) {
-    $scope.loadCities();
-  });
+  $scope.$watch('search', function(newValue, oldValue) {  $scope.loadCities()  });
 
   $scope.cities = function() {
     return $scope.allCities.concat($scope.preloadedCity, $scope.loadedCities)
   };
 
   $scope.loadCities = function() {
-    VK.api("places.getCities", {
-      country: 1,
-      q: $scope.search
-    }, function(data) {
-      $scope.$apply(function() {
-        $scope.loadedCities = data.response
-      });
+    VK.api("places.getCities", {country: 1, q: $scope.search}, function(data) {
+      $scope.$apply(function() {  $scope.loadedCities = data.response  });
     });
   };
 
   $scope.selectedCity = function() {
-    return _.detect($scope.cities(), function(c) {
-      return c.selected == true
-    })
+    return _.detect($scope.cities(), function(c) {  return c.selected == true  });
   };
 
   $scope.displaySearch = function() {
@@ -53,11 +44,6 @@ CitySelector = function($scope) {
   };
 
   $scope.hide = function(city) {
-    if ($scope.selectedCity()) {
-      return city != $scope.selectedCity()
-    } else {
-      return false
-    }
+    if ($scope.selectedCity()) {  return city != $scope.selectedCity()  } else {  return false  };
   };
-
 };
