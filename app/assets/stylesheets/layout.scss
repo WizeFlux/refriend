@@ -22,6 +22,21 @@ h3 {
 h4 {
 
 }
+/* Task show */
+menu form {
+display: inline;
+}
+.card-menu {
+margin: 0 auto;
+width: 620px;
+padding: 25px 0px 10px;
+}
+.card-footer {
+margin: 0 auto;
+width: 240px;
+padding-top: 30px;
+padding-bottom: 30px;
+}
 
 /*** FORM ***/
 fieldset {
@@ -60,9 +75,17 @@ footer.form {
         margin-right: 67px;
     }
 }
-input.submit {
+input.submit, .btn-vk {
     @include vkbutton;
 }
+a.btn-vk {
+    text-decoration: none;
+}
+.ng-binding {
+margin-left: 81px;
+}
+
+/*** Icon */
 .back:after {
 content: " ";
 background: url('../images/create_post_11.png');

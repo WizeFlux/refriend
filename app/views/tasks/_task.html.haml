@@ -1,14 +1,19 @@
-%section{'ng-controller' => 'People'}
-  %h1= link_to task.title, task_path(task)
-  %p
+%section{'ng-controller' => 'People', class: 'user-block'}
+  %div.user-card
     %img{src: "{{person(#{task.requester_uid}).photo}}"}
-    {{person(#{task.requester_uid}).first_name}} {{person(#{task.requester_uid}).nickname}} {{person(#{task.requester_uid}).last_name}}
-    
-  
-  %p= task.description
-  %p Views #{task.views_count}, References #{task.references.count}, Created at #{task.created_at}
-  %p
+    %div.user-desc
+      {{person(#{task.requester_uid}).first_name}} {{person(#{task.requester_uid}).nickname}} {{person(#{task.requester_uid}).last_name}}
+      %div.created_at
+        %span #{task.created_at}
+      %span.city= task.cid
+    %span= link_to task.title, task_path(task)
+    %p
     - task.tags.each do |tag|
       %i= tag
-
-  %hr
+  
+  %div.counter 
+    %div.views 
+      #{task.views_count}
+    %div.references
+      #{task.references.count}
+  %p= task.description
