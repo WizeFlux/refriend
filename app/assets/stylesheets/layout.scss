@@ -43,6 +43,7 @@ menu form {
     margin-left: 0;
     margin-top: 10px;
     float: left;
+    width: 82px;
 }
 .user-card .user-desc {
     float: left;
@@ -53,11 +54,37 @@ menu form {
     margin-left: 0;
     float: left;
 }
-.user-card .user-desc .created_at {
+.user-card .user-desc .created_date {
+    display: block;
     float: left;
+    color: #555E6C;
+    font-size: 13px;
+    background: url(../images/feedback_03.png) no-repeat 8px 1px;
+    padding-left: 26px;
+    padding-right: 10px;
+    margin-left: 36px;
+    height: 25px;
+}
+.user-card .user-desc .created_time {
+    display: block;
+    float: left;
+    color: #555E6C;
+    font-size: 13px;
+    background: url(../images/feedback_06.png) no-repeat 8px 1px;
+    padding-left: 26px;
+    padding-right: 10px;
+    height: 25px;
 }
 .user-card .user-desc .city {
+    display: block;
     float: left;
+    color: #555E6C;
+    font-size: 13px;
+    background: url(../images/feedback_09.png) no-repeat 12px 2px;
+    padding-left: 26px;
+    padding-right: 10px;
+    margin-left: 30px;
+    height: 25px;
 }
 .user-card .title {
     clear: both;
@@ -89,6 +116,7 @@ menu form {
 .counter {
     clear: both;
     text-align: center;
+    
     .stats {
         margin: auto;
         background: #FFF;
@@ -135,6 +163,40 @@ menu form {
     padding-bottom: 30px;
 }
 
+section.reference {
+    span.ng-binding {
+        margin-left: 34px;
+    }
+    .name.ng-binding {
+        margin-left: 0px;
+        width: 138px;
+    }
+    .reference_item {
+        float: left;
+        margin-left: 16px;
+        img {
+            margin-left: 40px;
+        }
+    }
+    .middle {
+        float: left;
+        font-family: 'OpenSans Book', sans-serif, arial;
+        font-size: 12px;
+        text-transform: lowercase;
+        margin-top: 12px;
+        padding-right: 24px;
+        padding-left: 22px;
+        background: url(../images/feedback_22.png) no-repeat 65px 5px;
+        padding-top: 27px;
+    }
+    p.description {
+        float: left;
+    }
+    form {
+        float: right;
+        padding-right: 19px;
+    }
+}
 /*** FORM ***/
 fieldset {
     border: none;

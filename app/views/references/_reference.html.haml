@@ -1,21 +1,23 @@
-%section{'ng-controller' => 'People'}
+%section.reference{'ng-controller' => 'People'}
   %h1 Рекомендации
-  %span
+  %div.reference_item
     %img{src: "{{person(#{reference.referencer_uid}).photo}}"}
-    {{person(#{reference.referencer_uid}).first_name}}
-    {{person(#{reference.referencer_uid}).nickname}}
-    {{person(#{reference.referencer_uid}).last_name}}
+    %div.name
+      {{person(#{reference.referencer_uid}).first_name}}
+      {{person(#{reference.referencer_uid}).nickname}}
+      {{person(#{reference.referencer_uid}).last_name}}
   - unless reference.referencer_uid == reference.referenced_uid
-    Рекомендация от
-    %span
+    %div.middle Рекомендация от
+    %div.reference_item
       %img{src: "{{person(#{reference.referenced_uid}).photo}}"}
-      {{person(#{reference.referenced_uid}).first_name}}
-      {{person(#{reference.referenced_uid}).nickname}}
-      {{person(#{reference.referenced_uid}).last_name}}
+      %div.name
+        {{person(#{reference.referenced_uid}).first_name}}
+        {{person(#{reference.referenced_uid}).nickname}}
+        {{person(#{reference.referenced_uid}).last_name}}
 
-  %p
+  %p.description
     = reference.description
     - if reference.referencer_uid == current_person_uid
       = form_for reference, method: :delete do |form|
-        = form.submit 'Delete'
-%hr
+        = form.submit 'X'
+

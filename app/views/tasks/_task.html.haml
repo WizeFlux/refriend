@@ -10,7 +10,9 @@
     %div.user-desc
       %div.name
         {{person(#{task.requester_uid}).first_name}} {{person(#{task.requester_uid}).nickname}} {{person(#{task.requester_uid}).last_name}}
-      %div.created_at
+      %div.created_date
+        %span #{task.created_at}
+      %div.created_time
         %span #{task.created_at}
       %span.city= task.cid
   
