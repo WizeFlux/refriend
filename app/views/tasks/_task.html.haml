@@ -12,8 +12,10 @@
       %i= tag
   
   %div.counter 
-    %div.views 
-      #{task.views_count}
-    %div.references
-      #{task.references.count}
+    %div.double_line
+    %div.stats
+      %div.count
+        #{task.views_count}
+      %div.references
+        #{task.references.count}
   %p= task.description

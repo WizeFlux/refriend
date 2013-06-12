@@ -22,20 +22,66 @@ h3 {
 h4 {
 
 }
+.double_line {
+    height: 1px;
+    border-top: 1px solid #E1E1E1;
+    border-bottom: 1px solid #E1E1E1;
+}
 /* Task show */
 menu form {
-display: inline;
+    display: inline;
 }
 .card-menu {
-margin: 0 auto;
-width: 620px;
-padding: 25px 0px 10px;
+    margin: 0 auto;
+    width: 620px;
+    padding: 25px 0px 10px;
 }
+.counter {
+    text-align: center;
+    .stats {
+        margin: auto;
+        background: #FFF;
+        display: inline-block;
+        overflow: hidden;
+        border: 1px solid #E1E1E1;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        margin-top: -15px;
+        .count {
+            display: block;
+            float: left;
+            color: #555E6C;
+            font-size: 13px;
+            background: url(../images/feedback_15.png) no-repeat 7px 7px;
+            padding-left: 26px;
+            padding-right: 10px;
+            border-right: 1px solid #DEDEDE;
+            height: 25px;
+            line-height: 25px;
+        }
+        .references {
+            display: block;
+            float: left;
+            text-align: left;
+            color: #555E6C;
+            font-size: 13px;
+            background: url(../images/feedback_17.png) no-repeat 7px 7px;
+            padding-left: 24px;
+            padding-right: 10px;
+            border-left: 1px solid #F7F7F7;
+            border-right: 1px solid #DEDEDE;
+            height: 25px;
+            line-height: 25px;
+        }
+    }
+}
+
 .card-footer {
-margin: 0 auto;
-width: 240px;
-padding-top: 30px;
-padding-bottom: 30px;
+    margin: 0 auto;
+    width: 240px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 /*** FORM ***/
