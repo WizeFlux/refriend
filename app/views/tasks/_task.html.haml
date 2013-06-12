@@ -1,15 +1,18 @@
 %section{'ng-controller' => 'People', class: 'user-block'}
   %div.user-card
     %img{src: "{{person(#{task.requester_uid}).photo}}"}
+    %div.deep-desc
+      %p.title= link_to task.title, task_path(task)
+      %div.tags
+        - task.tags.each do |tag|
+          %li= tag
+
     %div.user-desc
-      {{person(#{task.requester_uid}).first_name}} {{person(#{task.requester_uid}).nickname}} {{person(#{task.requester_uid}).last_name}}
+      %div.name
+        {{person(#{task.requester_uid}).first_name}} {{person(#{task.requester_uid}).nickname}} {{person(#{task.requester_uid}).last_name}}
       %div.created_at
         %span #{task.created_at}
       %span.city= task.cid
-    %span= link_to task.title, task_path(task)
-    %p
-    - task.tags.each do |tag|
-      %i= tag
   
   %div.counter 
     %div.double_line

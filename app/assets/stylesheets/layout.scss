@@ -36,7 +36,58 @@ menu form {
     width: 620px;
     padding: 25px 0px 10px;
 }
+.user-card {
+    padding-bottom: 65px;
+}
+.user-card img {
+    margin-left: 0;
+    margin-top: 10px;
+    float: left;
+}
+.user-card .user-desc {
+    float: left;
+    margin-top: 10px;
+    margin-left: -57px;
+}
+.user-card .user-desc .name {
+    margin-left: 0;
+    float: left;
+}
+.user-card .user-desc .created_at {
+    float: left;
+}
+.user-card .user-desc .city {
+    float: left;
+}
+.user-card .title {
+    clear: both;
+}
+.user-card .deep-desc {
+    float: left;
+    margin-top: 25px;
+    margin-left: 35px;
+    padding-bottom: 25px;
+}
+.user-card .tags li {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 19px;
+    height: 19px;
+    padding: 0 6px;
+    margin-right: 2px;
+    margin-bottom: 6px;
+    overflow: hidden;
+    background: #F1F1F1;
+    color: #686868;
+    border: #E2E2E2 solid 1px;
+}
+
 .counter {
+    clear: both;
     text-align: center;
     .stats {
         margin: auto;
