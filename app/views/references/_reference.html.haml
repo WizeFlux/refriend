@@ -7,7 +7,7 @@
       {{person(#{reference.referencer_uid}).nickname}}
       {{person(#{reference.referencer_uid}).last_name}}
   - unless reference.referencer_uid == reference.referenced_uid
-    %div.middle Рекомендация от
+    %div.middle Рекомендует
     %div.reference_item
       %img{src: "{{person(#{reference.referenced_uid}).photo}}"}
       %div.name

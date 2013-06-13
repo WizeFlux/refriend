@@ -1,18 +1,20 @@
-= form_for @reference, url: task_references_path(@task) do |form|
-  %fieldset
-    = form.label :description
-    = form.text_area :description
-    = form.hidden_field :referenced_uid, value: current_person_uid
-    
-  %fieldset{'ng-controller' => 'FriendSelect'}
-    %a{'ng-click' => "loadFriends(#{current_person_uid})", 'href' => '#', 'ng-hide' => 'friends.length > 1'} Select friend
-    %input{'type' => 'search', 'ng-model' => 'search', 'ng-show' => 'displaySearch()'}
-    %ul
-      %li{'ng-repeat' => 'friend in friends | filter:search', 'ng-show' => 'show(friend)'}
-        %input{'type' => 'checkbox', 'name' => 'reference[referenced_uid]', 'ng-model' => 'friend.selected', 'value' => '{{friend.uid}}'}
-        %img{src: '{{friend.photo}}'}
-        = form.label :referenced_uid, '{{friend.first_name}} {{friend.nickname}} {{friend.last_name}}'
-    
-  %footer
-    = form.submit 'Save'
-    = link_to 'Cancel', task_path(@task)
+%div.form-references
+  = form_for @reference, url: task_references_path(@task) do |form|
+
+    %fieldset{'ng-controller' => 'FriendSelect'}
+      %a{'ng-click' => "loadFriends(#{current_person_uid})", 'href' => '#', 'ng-hide' => 'friends.length > 1'} Рекомендовать друга
+      %div.close= link_to 'X', task_path(@task)
+      %input{'type' => 'search', 'ng-model' => 'search', 'ng-show' => 'displaySearch()'}
+      %ul.friends
+        %li{'ng-repeat' => 'friend in friends | filter:search', 'ng-show' => 'show(friend)'}
+          %input{'type' => 'checkbox', 'name' => 'reference[referenced_uid]', 'ng-model' => 'friend.selected', 'value' => '{{friend.uid}}'}
+          %img{src: '{{friend.photo}}'}
+          = form.label :referenced_uid, '{{friend.first_name}} {{friend.nickname}} {{friend.last_name}}'
+
+    %fieldset
+      = form.text_area :description, placeholder: 'Введите ваш коментарий'
+      = form.hidden_field :referenced_uid, value: current_person_uid  
+
+    %footer
+      = form.submit 'Рекомендовать', class: 'submit'
+  

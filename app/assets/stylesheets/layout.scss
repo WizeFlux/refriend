@@ -50,6 +50,9 @@ menu form {
     margin-top: 10px;
     margin-left: -57px;
 }
+.user-card .user-desc.feedback-desc .name {
+    margin-left: 28px;
+}
 .user-card .user-desc .name {
     margin-left: 0;
     float: left;
@@ -240,9 +243,64 @@ section.reference {
 .other-reference {
     clear: both;
 }
-
+.form-references textarea {
+padding-top: 9px;
+}
+.form-references {
+    border: solid #CECECE 1px;
+    display: inline-block;
+    padding-bottom: 19px;
+    padding-left: 21px;
+    padding-right: 18px;
+    border-radius: 4px;
+    padding-top: 13px;
+    position: relative;
+    .close a {
+        position: absolute;
+        right: 20px;
+        top: 18px;
+        background: url('../images/post_03.png') no-repeat;
+        height: 15px;
+        width: 11px;
+        text-indent: -9999px;
+    }
+    footer {
+        float: right;
+        margin-right: 11px;
+    }
+    footer.form {
+        margin-left: 11px;
+    }
+}
 /* References list */
-
+.friends {
+    width: 42px;
+}
+.friends input {
+    width: 13px;
+    margin-top: 12px;
+    margin-left: 21px;
+}
+.friends label {
+    margin-left: 0px;
+    float: left;
+    display: block;
+}
+.friends img {
+    float: left;
+    margin-bottom: 20px;
+    margin-right: 38px;
+}
+.friends li {
+    display: block;  
+    width: 252px;
+    clear: both;
+    margin-bottom: 40px;
+    margin-left: -26px;
+}
+.form-references input[type="search"] {
+    width: 244px;
+}
 
 /*** FORM ***/
 fieldset {

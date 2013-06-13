@@ -7,7 +7,7 @@
         - task.tags.each do |tag|
           %li= tag
 
-    %div.user-desc
+    %div.user-desc.feedback-desc
       %div.name
         {{person(#{task.requester_uid}).first_name}} {{person(#{task.requester_uid}).nickname}} {{person(#{task.requester_uid}).last_name}}
       %div.created_date
