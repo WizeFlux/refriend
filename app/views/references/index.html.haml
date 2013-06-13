@@ -1,12 +1,52 @@
-= link_to 'Back to index of tasks', root_path
+%div.reference-list
+  = link_to 'Вернуться к списку объявлений', root_path, class: 'back'
+ 
+  %div.you-reference
+    %h1 Вы рекомендуете
+    %div.recomender
+      %img{src: "http://cs418626.vk.me/u16989823/75628422/s_6a247c6c29x:001.jpg"}
+      %div.name Name
+    %div.arrow  
+    %div.user-card.recomend_to
+      %img{src: "http://cs418626.vk.me/u16989823/75628422/s_6a247c6c29x:001.jpg"}
+      %div.name Test name
+      %div.deep-desc
+        %p.title Title 
+        %div.tags
+          %li tag
+          %li tag
+      %div.user-desc
+        %div.created_date
+          %span created_at
+        %div.created_time
+          %span created_at
+        %span.city Saint-p
 
+  %div.other-reference
+    %h1 Вас рекомендуют
+    %div.recomender
+      %img{src: "http://cs418626.vk.me/u16989823/75628422/s_6a247c6c29x:001.jpg"}
+      %div.name Name
+    %div.arrow  
+    %div.user-card.recomend_to
+      %img{src: "http://cs418626.vk.me/u16989823/75628422/s_6a247c6c29x:001.jpg"}
+      %div.name Test name
+      %div.deep-desc
+        %p.title Title 
+        %div.tags
+          %li tag
+          %li tag
+      %div.user-desc
+        %div.created_date
+          %span created_at
+        %div.created_time
+          %span created_at
+        %span.city Saint-p
+/ - @references.where(referencer_uid: current_person_uid).each do |reference|
+/   = render 'tasks/task', task: reference.task
+/   = render 'reference', reference: reference
 
-%h1 I recommed
-- @references.where(referencer_uid: current_person_uid).each do |reference|
-  = render 'tasks/task', task: reference.task
-  = render 'reference', reference: reference
-  
-%h1 I recommeded
-- @references.where(:referenced_uid => current_person_uid, :referencer_uid.ne => current_person_uid).each do |reference|
-  = render 'tasks/task', task: reference.task
-  = render 'reference', reference: reference
+/ %h1 I recommeded
+/ - @references.where(:referenced_uid => current_person_uid, :referencer_uid.ne => current_person_uid).each do |reference|
+/   = render 'tasks/task', task: reference.task
+/  = render 'reference', reference: reference

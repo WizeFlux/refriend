@@ -162,7 +162,7 @@ menu form {
     padding-top: 30px;
     padding-bottom: 30px;
 }
-
+/* Reference */
 section.reference {
     span.ng-binding {
         margin-left: 34px;
@@ -197,6 +197,53 @@ section.reference {
         padding-right: 19px;
     }
 }
+/*** My reference **/
+.reference-list  .back {
+    float: right;
+    margin-bottom: 13px;
+}
+.arrow {
+    background: url('../images/commends_03.png') no-repeat;
+    display: block;
+    width: 13px;
+    height: 29px;
+    float: left;
+    margin-top: 23px;
+    margin-right: 15px;
+    margin-left: 10px;
+}
+.recomender {
+    float: left;
+    margin-top: 13px;
+    img {
+        margin-left: 10px;
+        width: 70px;
+    }
+}
+.recomend_to {
+    img {
+        width: 95px;
+        margin-top: -1px;
+    }
+    .name {
+    float: left;
+        margin-left: 27px;
+    }
+    .deep-desc {
+    clear: none;
+        margin-left: -67px;
+    }
+    .user-desc {
+        float: none;
+    }
+}
+.other-reference {
+    clear: both;
+}
+
+/* References list */
+
+
 /*** FORM ***/
 fieldset {
     border: none;
