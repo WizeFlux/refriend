@@ -19,5 +19,6 @@
     = reference.description
     - if reference.referencer_uid == current_person_uid
       = form_for reference, method: :delete do |form|
-        = form.submit 'X'
+        %div.submit-delete
+          = form.submit ''
 

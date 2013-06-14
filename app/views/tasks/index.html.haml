@@ -34,7 +34,6 @@
     %div#dropdown-1.dropdown.dropdown-tip
       %ul.dropdown-menu
         %li= link_to 'Мои рекомендации', references_path  
-        %li= link_to 'Мои объявления', references_path  
   %div.tags 
     %ul
       %li.tag 
@@ -82,17 +81,16 @@
       %h1 Порекомендуйте друга
       %div.add-task= link_to 'Добавить объявление', new_task_path, class: 'btn-vk'
   %div.nano
-    %div.content
-      - @tasks.each do |task|
-        = render 'task', task: task
-        %hr
-  %div.pagination
-    %span.previous_page Предыдущая
-    %em.current 1
-    %a.next{'href' => '#'} 2
-    %a{'href' => '#'} 3
-    %a{'href' => '#'} 4
-    %a{'href' => '#'} 5
-    %span.gap ...
-    %a{'href' => '#'} 15
-    %a.next_page{'href' => '#', 'rel' => 'next'} Следущая
+    - @tasks.each do |task|
+      = render 'task', task: task
+      %hr
+    %div.pagination
+      %span.previous_page Предыдущая
+      %em.current 1
+      %a.next{'href' => '#'} 2
+      %a{'href' => '#'} 3
+      %a{'href' => '#'} 4
+      %a{'href' => '#'} 5
+      %span.gap ...
+      %a{'href' => '#'} 15
+      %a.next_page{'href' => '#', 'rel' => 'next'} Следущая
