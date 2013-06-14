@@ -6,3 +6,4 @@
 //= require tags_selector
 //= require jquery
 //= require jquery.dropdown
+//= require tinyscrollbar
