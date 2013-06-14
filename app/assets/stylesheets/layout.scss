@@ -600,6 +600,15 @@ padding-top: 9px;
 .friends {
     width: 42px;
 }
+ul.friends {
+width: 42px;
+overflow: scroll;
+height: 305px;
+width: 254px;
+margin-top: 1px;
+margin-left: -11px;
+}
+
 .friends input {
     width: 13px;
     margin-top: 12px;
@@ -708,4 +717,6 @@ background: url(../images/post_07.png) no-repeat;
 border: none;
 width: 17px;
 height: 16px;
+margin-top: -2px;
+margin-right: 2px;
 }
