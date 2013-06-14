@@ -1,12 +1,96 @@
-%h1
-  Tasks
-  %small= link_to 'New task', new_task_path
-  %small= link_to 'My references', references_path
+%div.main-tasks
+  %div.city-select
+    %fieldset
+      %input.city{'type' => 'search', 'placeholder' => 'Выберите город'}
+      %a.drop-toggle{href: '#', data: { dropdown: '#dropdown-2'} }
+    %div#dropdown-2.dropdown.dropdown-tip
+      %ul.dropdown-menu
+        %li
+          %a{'href' => '#'} Saint-P
+        %li.dropdown-divider
+        %li 
+          %a{'href' => '#'} Moscow
+        %li.dropdown-divider
+        %li 
+          %a{'href' => '#'} Ryazan
+        %li.dropdown-divider
+        %li 
+          %a{'href' => '#'} Kazan
+  %div.search-bar
+    %fieldset{'ng-controller' => 'TagsSelector', 'ng-init' => "loadTags(#{tag_list.to_json})"}
+      %i.icon-search 
+      / form submit is icon-search
+      %input{'type' => 'search', 'ng-model' => 'search'}
+      %div.selected-tags
+        %div.tag
+          %span Tag 1
+          %a.icon-close{'href' => '#'}  
+        %div.tag
+          %span Tag 2
+          %a.icon-close{'href' => '#'} 
+  %div.user-menu
+    %img{src: 'http://cs310722.vk.me/u16984127/75628422/s_c93226c701x:001.jpg'}
+    %a.drop-toggle{href: '#', data: { dropdown: '#dropdown-1'} }
+    %div#dropdown-1.dropdown.dropdown-tip
+      %ul.dropdown-menu
+        %li= link_to 'Мои рекомендации', references_path  
+        %li= link_to 'Мои объявления', references_path  
+  %div.tags 
+    %ul
+      %li.tag 
+        %a{'href' => '#'} Test
+      %li.tag 
+        %a{'href' => '#'} Test
+      %li.tag 
+        %a{'href' => '#'} Test
+      %li.tag 
+        %a{'href' => '#'} Test
+      %li.tag 
+        %a{'href' => '#'} Test
+      %li.tag 
+        %a{'href' => '#'} Test
+      %li.tag 
+        %a{'href' => '#'} Test
+      %li.tag 
+        %a{'href' => '#'} Test
+      %li.tag 
+        %a{'href' => '#'} Test
+      %li.tag 
+        %a{'href' => '#'} Test
+      %li.tag 
+        %a{'href' => '#'} Test
+      %li.tag 
+        %a{'href' => '#'} Test
+      %li.tag 
+        %a{'href' => '#'} Test
 
-= render 'query_form'
+  /= render 'query_form'  
   
-    
-%hr
-- @tasks.each do |task|
-  = render 'task', task: task
-      
+
+  %div.friend-radio
+    %div.double_line
+    %div.radio
+      %div.my-recomends.active
+        %span Мои рекомендации
+      %div.all-users
+        %span Все пользователи
+      %div.friends
+        %span Только друзей
+
+  %div.task-body
+    %div.top
+      %h1 Порекомендуйте друга
+      %div.add-task= link_to 'Добавить объявление', new_task_path, class: 'btn-vk'
+  - @tasks.each do |task|
+    = render 'task', task: task
+    %hr
+  %div.pagination
+    %span.previous_page Предыдущая
+    %em.current 1
+    %a.next{'href' => '#'} 2
+    %a{'href' => '#'} 3
+    %a{'href' => '#'} 4
+    %a{'href' => '#'} 5
+    %span.gap ...
+    %a{'href' => '#'} 15
+    %a.next_page{'href' => '#', 'rel' => 'next'} Следущая
