@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   def destroy;      @task.destroy ? redirect_to(root_url) : render(text: 'faild');  end
   
   def find_tasks
-    @tasks = Task.page(params[:page]).per(1)
+    @tasks = Task.page(params[:page]).per(5)
   end
   
   def tag_list
