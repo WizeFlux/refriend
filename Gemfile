@@ -13,10 +13,9 @@ gem 'vkontakte_api'
 gem "mongoid-simple-tags"
 gem 'jbuilder', '~> 1.0.1'
 
-#front-end
-group :assets do
-  gem 'compass-rails'
-end
+gem "bootstrap-sass"
+gem "compass-rails"
+
 
 # deploy
 gem 'unicorn'

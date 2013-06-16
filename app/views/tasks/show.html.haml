@@ -1,5 +1,5 @@
-= render 'task_menu', task: @task
-= render 'task', task: @task
+= render 'units/task_menu', task: @task
+= render 'units/task', task: @task
 %section
   - @task.references.each do |reference|
     = render 'references/reference', reference: reference

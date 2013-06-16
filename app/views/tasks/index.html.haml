@@ -3,10 +3,10 @@
   %small= link_to 'New task', new_task_path
   %small= link_to 'My references', references_path
 
-= render 'query_form'
+= render 'tasks/units/query_form'
   
     
 %hr
 - @tasks.each do |task|
-  = render 'task', task: task
+  = render 'tasks/units/task', task: task
       
