@@ -1,0 +1,10 @@
+.navbar.navbar-static-top{'ng-controller' => 'People'}
+  .navbar-inner
+    %ul.nav
+      %li
+        %img.navbar-avatar{src: "{{person(#{current_person_uid}).photo}}", alt: 'User avatar'}      
+      %li
+        %a{href: tasks_path} Мои объявления
+      %li
+        %a{href: references_path} Мои рекоммендации
+      

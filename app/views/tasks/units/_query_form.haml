@@ -1,0 +1,42 @@
+= form_for :query, method: :get do |form|
+  
+  %fieldset{'ng-controller' => 'TagsSelector', 'ng-init' => "loadTags(#{tag_list.to_json})"}
+    %legend Tags
+    %table
+      %tr
+        %td
+          %input{'type' => 'search', 'ng-model' => 'search'}
+        %td
+          %h4 Selected
+      %tr
+        %td
+          %ul
+            %li{'ng-repeat' => 'tag in tags | filter:search | filter:{selected: false}'}
+              {{tag.name}}
+              %a{'href' => '#', 'ng-click' => 'tag.selected = true'} -->
+        %td
+          %ul
+            %li{'ng-repeat' => 'tag in tags | filter: {selected: true}'}
+              %input{'type' => 'hidden', 'value' => '{{tag.name}}', 'name' => 'query[tags][]'}
+              %a{'href' => '#', 'ng-click' => 'tag.selected = false'} X
+              {{tag.name}}
+  
+  %fieldset
+    %legend City
+    #city-selector{'ng-controller' => 'CitySelector', 'ng-init' => "preloadCity('#{current_person_cid}')"}
+      %input{'type' => 'search', 'ng-model' => 'search', 'ng-show' => 'displaySearch()'}
+      %ul
+        %li{'ng-repeat' => 'city in cities()', 'ng-hide' => 'hide(city)'}
+          %input{'type' => 'checkbox', 'ng-model' => 'city.selected', 'id' => '{{city.cid}}', 'name' => 'query[cid]', 'value' => '{{city.cid}}'}
+          %label{'for' => '{{city.cid}}'} {{city.title}} {{city.region}} {{city.area}}
+  
+  %fieldset
+    %legend Scope
+    = form.radio_button :scope, 'friends', checked: (scope == 'friends')
+    = form.label :scope_friends, 'Friends tasks'
+    = form.radio_button :scope, 'own', checked: (scope == 'own')
+    = form.label :scope_own, 'Own tasks'
+    = form.radio_button :scope, 'all', checked: (scope == 'all')
+    = form.label :scope_all, 'All tasks'
+  
+  = form.submit 'Search'
