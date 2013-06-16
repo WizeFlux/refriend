@@ -7,11 +7,14 @@ class TasksController < ApplicationController
     
   def new_task;     @task = Task.new task_params;  end
   def find_task;    @task = Task.find params[:id];  end
-  def find_tasks;   @tasks = Task.all;  end
   def create;       @task.save ? redirect_to(@task) : render(:new);  end
   def update;       @task.update_attributes(task_params) ? redirect_to(@task) : render(:edit);  end
   def show;         @task.view!;  end
   def destroy;      @task.destroy ? redirect_to(root_url) : render(text: 'faild');  end
+  
+  def find_tasks
+    @tasks = Task.page(params[:page]).per(1)
+  end
   
   def tag_list
     Task.tag_list.collect do |tag|

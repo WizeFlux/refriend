@@ -1,7 +1,8 @@
-%menu  
-  = link_to 'New reference', new_task_reference_path(task)
-  = link_to 'Back to index of tasks', root_path
-  - if task.requester_uid == current_person_uid
-    = link_to 'Edit', edit_task_path(task)
-    = form_for task, method: :delete do |form|
-      = form.submit 'Delete'
+%center
+  = form_for task, method: :delete do |form|
+    - if task.requester_uid == current_person_uid
+      = form.submit 'Удалить', class: 'btn btn-primary'
+      = link_to 'Редактировать', edit_task_path(task), class: 'btn btn-primary'
+    = link_to 'Рекоммендовать', new_task_reference_path(task), class: 'btn btn-primary'
+  
+    

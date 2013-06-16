@@ -1,15 +1,35 @@
-%section{'ng-controller' => 'People'}
-  %h1= link_to task.title, task_path(task)
-  %p
-    %img{src: "{{person(#{task.requester_uid}).photo}}"}
-    %a{'href' => "http://vk.com/id#{task.requester_uid}", 'target' => '_blank'}
-      {{person(#{task.requester_uid}).first_name}} {{person(#{task.requester_uid}).nickname}} {{person(#{task.requester_uid}).last_name}}
-    
-  
-  %p= task.description
-  %p Views #{task.views_count}, References #{task.references.count}, Created at #{task.created_at}
-  %p
-    - task.tags.each do |tag|
-      %i= tag
+.row-fluid.thumbnail
+  .span2
+    %img{src: "{{person(#{task.requester_uid}).photo_big}}"}
 
-  %hr
+  .span10
+    %ul.inline.pull-right
+      %li
+        %i.icon-eye-open
+        = task.views_count
+      %li
+        %i.icon-user
+        = task.references.count
+      %li
+        %i.icon-time
+        = task.created_at.strftime('%H:%M')
+      %li
+        %i.icon-calendar
+        = task.created_at.strftime('%d/%m/%y')
+      %li
+        %i.icon-map-marker
+        - if task.cid == 'all'
+          Все города
+        - else
+          {{city(#{task.cid}).name}}
+    %a{'href' => "http://vk.com/id#{task.requester_uid}", 'target' => '_blank'}
+      {{person(#{task.requester_uid}).first_name}}
+      {{person(#{task.requester_uid}).nickname}}
+      {{person(#{task.requester_uid}).last_name}}
+    
+    %h4= link_to task.title, task_path(task)  
+
+    %p
+      - task.tags.each do |tag|
+        .label= tag
+%br

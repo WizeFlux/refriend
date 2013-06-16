@@ -1,10 +1,10 @@
-.navbar.navbar-static-top{'ng-controller' => 'People'}
+.navbar{'ng-controller' => 'Static'}
   .navbar-inner
     %ul.nav
       %li
         %img.navbar-avatar{src: "{{person(#{current_person_uid}).photo}}", alt: 'User avatar'}      
-      %li
-        %a{href: tasks_path} Мои объявления
-      %li
-        %a{href: references_path} Мои рекоммендации
-      
+      %li.divider-vertical
+      %li{class: active_if(controller_name == 'tasks')}
+        %a{href: tasks_path} Объявления
+      %li{class: active_if(controller_name == 'references')}
+        %a{href: references_path} Рекоммендации

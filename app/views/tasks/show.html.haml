@@ -1,5 +1,10 @@
-= render 'units/task_menu', task: @task
-= render 'units/task', task: @task
-%section
+%div{'ng-controller' => 'Static'}
+  = render 'tasks/units/task', task: @task
+  .row-fluid
+    %p= @task.description
+  = render 'tasks/units/task_menu', task: @task
+  - unless @task.references.blank?
+    %p.lead Рекоммендации
   - @task.references.each do |reference|
-    = render 'references/reference', reference: reference
+    = render 'references/units/reference', reference: reference
+    %hr

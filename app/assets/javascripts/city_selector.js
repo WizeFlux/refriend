@@ -4,7 +4,7 @@ CitySelector = function($scope) {
   $scope.loading = false;
 
   $scope.allCities = [{
-    title: 'All cities',
+    title: 'Все города',
     cid: 'all',
     selected: false
   }];
@@ -45,5 +45,9 @@ CitySelector = function($scope) {
 
   $scope.hide = function(city) {
     if ($scope.selectedCity()) {  return city != $scope.selectedCity()  } else {  return false  };
+  };
+  
+  $scope.select = function(city) {
+    if (city.selected) {  city.selected = false  } else {  city.selected = true  };
   };
 };

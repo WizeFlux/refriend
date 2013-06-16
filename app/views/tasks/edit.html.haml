@@ -1,2 +1,3 @@
-%h1 Редактирование '#{@task.title}'
-= render 'form', task: @task
+%div{'ng-controller' => 'Static'}
+  = render 'tasks/units/task', task: @task
+= render 'tasks/units/form', task: @task

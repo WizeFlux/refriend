@@ -13,6 +13,10 @@ FriendSelect = function($scope) {
     if ($scope.selectedFriend()) {  return friend == $scope.selectedFriend()  } else {  return true  };
   };
   
+  $scope.select = function(friend) {
+    if (friend.selected) {  friend.selected = false  } else {  friend.selected = true  };
+  };
+    
   $scope.displaySearch = function() {
     return ($scope.friends.length > 1) && (typeof $scope.selectedFriend() == 'undefined');
   };

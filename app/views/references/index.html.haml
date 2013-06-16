@@ -1,12 +1,35 @@
-= link_to 'Back to index of tasks', root_path
+%div{'ng-controller' => 'Static'}
+  %p.lead Я рекоммендую
+  - @references.where(referencer_uid: current_person_uid).each do |reference|
+    .row-fluid
+      .span2.text-center
+        %br
+        %a{'href' => "http://vk.com/id#{reference.referenced_uid}", 'target' => '_blank'}
+          %img{src: "{{person(#{reference.referenced_uid}).photo}}"}
+          %br
+          {{person(#{reference.referenced_uid}).first_name}}
+          {{person(#{reference.referenced_uid}).nickname}}
+          {{person(#{reference.referenced_uid}).last_name}}
+      .span1
+        %br
+        %br
+        %i.icon-arrow-right
+      .span9
+        = render 'tasks/units/task', task: reference.task
 
-
-%h1 I recommed
-- @references.where(referencer_uid: current_person_uid).each do |reference|
-  = render 'tasks/task', task: reference.task
-  = render 'reference', reference: reference
   
-%h1 I recommeded
-- @references.where(:referenced_uid => current_person_uid, :referencer_uid.ne => current_person_uid).each do |reference|
-  = render 'tasks/task', task: reference.task
-  = render 'reference', reference: reference
+  %p.lead Меня рекоммендуют
+  - @references.where(:referenced_uid => current_person_uid, :referencer_uid.ne => current_person_uid).each do |reference|
+    .row-fluid
+      .span2.text-center
+        %br
+        %a{'href' => "http://vk.com/id#{reference.referencer_uid}", 'target' => '_blank'}
+          %img{src: "{{person(#{reference.referencer_uid}).photo}}"}
+          %br
+          {{person(#{reference.referencer_uid}).first_name}} {{person(#{reference.referencer_uid}).nickname}} {{person(#{reference.referencer_uid}).last_name}}
+      .span1
+        %br
+        %br
+        %i.icon-arrow-right
+      .span9
+        = render 'tasks/units/task', task: reference.task

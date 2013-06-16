@@ -1,20 +1,23 @@
 = form_for task do |form|
-  %fieldset
-    = form.label :title
-    = form.text_field :title
-  %fieldset
-    = form.label :description
-    = form.text_area :description
-  %fieldset
-    = form.label :tag_list
-    = form.text_field :tag_list
-  %fieldset{'ng-controller' => 'CitySelector', 'ng-init' => "preloadCity('#{task.cid || current_person_cid}')"}
-    = form.label 'City'
-    %input{'type' => 'search', 'ng-model' => 'search', 'ng-show' => 'displaySearch()'}
-    %ul
-      %li{'ng-repeat' => 'city in cities()', 'ng-hide' => 'hide(city)'}
-        %input{'type' => 'checkbox', 'ng-model' => 'city.selected', 'id' => '{{city.cid}}', 'name' => 'task[cid]', 'value' => '{{city.cid}}'}
-        %label{'for' => '{{city.cid}}'} {{city.title}} {{city.region}} {{city.area}}
-  %footer.form
-    = form.submit 'Опубликовать', class: 'submit'
-    = link_to 'Вернуться к списку объявлений', (action_name == 'new') ? root_url : task_path(task), class: 'back'
+  %fieldset.row-fluid
+
+    = form.label :title, 'Название'
+    = form.text_field :title, class: 'span12'
+
+    = form.label 'Город'
+    .well.well-small{'ng-controller' => 'CitySelector', 'ng-init' => "preloadCity('#{task.cid || current_person_cid}')"}    
+      %input{'type' => 'hidden', 'name' => 'task[cid]', 'value' => '{{selectedCity().cid}}'}
+      %input.span12{'type' => 'search', 'ng-model' => 'search', 'ng-show' => 'displaySearch()', 'placeholder' => 'Поиск города'}
+      %ul.unstyled
+        %li{'ng-repeat' => 'city in cities()', 'ng-hide' => 'hide(city)'}
+          %a{'href' => '#', 'ng-click' => 'select(city)'} {{city.title}} {{city.region}} {{city.area}}
+
+    = form.label :description, 'Описание'
+    = form.text_area :description, rows: 6, class: 'span12'
+    
+    = form.label :tag_list, 'Список тегов'
+    = form.text_field :tag_list, class: 'span12'
+
+  .form-actions
+    = form.submit 'Опубликовать', class: 'btn btn-primary'
+    = link_to 'Отмена', (action_name == 'new') ? root_url : task_path(task), class: 'btn'

@@ -1,42 +1,41 @@
 = form_for :query, method: :get do |form|
-  
-  %fieldset{'ng-controller' => 'TagsSelector', 'ng-init' => "loadTags(#{tag_list.to_json})"}
-    %legend Tags
-    %table
-      %tr
-        %td
-          %input{'type' => 'search', 'ng-model' => 'search'}
-        %td
-          %h4 Selected
-      %tr
-        %td
-          %ul
+  %fieldset
+    .row-fluid{'ng-controller' => 'TagsSelector', 'ng-init' => "loadTags(#{tag_list.to_json})"}
+      .span4
+        %p.lead Город
+        .well.well-small{'ng-controller' => 'CitySelector', 'ng-init' => "preloadCity('#{current_person_cid}')"}    
+          %input{'type' => 'hidden', 'name' => 'query[cid]', 'value' => '{{selectedCity().cid}}'}
+          %input.span12{'type' => 'search', 'ng-model' => 'search', 'ng-show' => 'displaySearch()', 'placeholder' => 'Поиск города'}
+          %ul.unstyled
+            %li{'ng-repeat' => 'city in cities()', 'ng-hide' => 'hide(city)'}
+              %a{'href' => '#', 'ng-click' => 'select(city)'} {{city.title}} {{city.region}} {{city.area}}
+          
+      .span4
+        %p.lead Доступные теги
+        .well.well-small.tag-cloud
+          %input.span12{'type' => 'search', 'ng-model' => 'search', 'placeholder' => 'Поиск тега'}
+          %ul.inline
             %li{'ng-repeat' => 'tag in tags | filter:search | filter:{selected: false}'}
-              {{tag.name}}
-              %a{'href' => '#', 'ng-click' => 'tag.selected = true'} -->
-        %td
-          %ul
+              %span.label.label-warning{'href' => '#', 'ng-click' => 'tag.selected = true', 'style' => 'cursor: pointer'} {{tag.name}}
+      .span4
+        %p.lead Выбранные теги
+        .well.well-small.tag-cloud
+          %ul.inline
             %li{'ng-repeat' => 'tag in tags | filter: {selected: true}'}
               %input{'type' => 'hidden', 'value' => '{{tag.name}}', 'name' => 'query[tags][]'}
-              %a{'href' => '#', 'ng-click' => 'tag.selected = false'} X
-              {{tag.name}}
+              %span.label.label-success{'href' => '#', 'ng-click' => 'tag.selected = false', 'style' => 'cursor: pointer'} {{tag.name}}
+        
+
   
-  %fieldset
-    %legend City
-    #city-selector{'ng-controller' => 'CitySelector', 'ng-init' => "preloadCity('#{current_person_cid}')"}
-      %input{'type' => 'search', 'ng-model' => 'search', 'ng-show' => 'displaySearch()'}
-      %ul
-        %li{'ng-repeat' => 'city in cities()', 'ng-hide' => 'hide(city)'}
-          %input{'type' => 'checkbox', 'ng-model' => 'city.selected', 'id' => '{{city.cid}}', 'name' => 'query[cid]', 'value' => '{{city.cid}}'}
-          %label{'for' => '{{city.cid}}'} {{city.title}} {{city.region}} {{city.area}}
+  %center{'ng-controller' => 'ScopeSelector', 'ng-init' => "scope = '#{scope}'"}
+    %input{'type' => 'hidden', 'name' => 'query[scope]', 'value' => '{{scope}}'}
+    .btn-toolbar 
+      .btn-group
+        %a.btn{'ng-click' => 'scope = "all"', 'ng-class' => 'activeIf("all")'} Все объявления
+        %a.btn{'ng-click' => 'scope = "friends"', 'ng-class' => 'activeIf("friends")'} Только друзей
+        %a.btn{'ng-click' => 'scope = "own"', 'ng-class' => 'activeIf("own")'} Только мои
+      .btn-group
+        = form.submit 'Искать', class: 'btn btn-primary'
+
   
-  %fieldset
-    %legend Scope
-    = form.radio_button :scope, 'friends', checked: (scope == 'friends')
-    = form.label :scope_friends, 'Friends tasks'
-    = form.radio_button :scope, 'own', checked: (scope == 'own')
-    = form.label :scope_own, 'Own tasks'
-    = form.radio_button :scope, 'all', checked: (scope == 'all')
-    = form.label :scope_all, 'All tasks'
   
-  = form.submit 'Search'

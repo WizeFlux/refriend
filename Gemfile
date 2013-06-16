@@ -12,10 +12,8 @@ gem 'underscore-rails'
 gem 'vkontakte_api'
 gem "mongoid-simple-tags"
 gem 'jbuilder', '~> 1.0.1'
-
+gem "kaminari"
 gem "bootstrap-sass"
-gem "compass-rails"
-
 
 # deploy
 gem 'unicorn'
