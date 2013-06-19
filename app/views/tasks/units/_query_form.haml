@@ -1,4 +1,4 @@
-= form_for :query, method: :get do |form|
+= form_for :query, method: :get, html: {'ng-controller' => 'QueryForm'} do |form|
   .row-fluid
     .span2{"style" => "position: relative", "ng-controller" => 'CitySelector', "ng-init" => "preloadCity(#{current_person_cid})"}
       %a{"href" => "#", "ng-click" => "comboBoxOpen = true"}
@@ -40,3 +40,5 @@
         .btn-group
           %a.btn{'ng-click' => 'scope = "all"', 'ng-class' => 'activeIf("all")'} Все объявления
           %a.btn{'ng-click' => 'scope = "friends"', 'ng-class' => 'activeIf("friends")'} Только друзей
+          
+  %a{'ng-click' => 'call()'}aaa
