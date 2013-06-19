@@ -1,5 +1,5 @@
 CitySelector = function($scope) {
-  $scope.comboBoxOpen = false;
+  
   $scope.loadedCities = [];
   $scope.selectedCity = {};
   
@@ -7,10 +7,16 @@ CitySelector = function($scope) {
   
   $scope.select = function(city) {
     $scope.selectedCity = city;
-    $scope.toggleComboBox();
+    $scope.comboBoxOpen = false;
   };
-  
-  $scope.toggleComboBox = function() {  $scope.comboBoxOpen = !$scope.comboBoxOpen  };
+
+  $scope.preloadCity = function(cid) {
+    VK.api("places.getCityById", {cids: cid}, function(data) {
+      // $scope.$apply(function() {
+        $scope.select({  title: data.response[0].name, cid: data.response[0].cid  });
+      // });
+    });      
+  };
   
   $scope.loadCities = function() {
     VK.api("places.getCities", {country: 1, q: $scope.search}, function(data) {
@@ -28,19 +34,7 @@ CitySelector = function($scope) {
   //   selected: false
   // }];
   // 
-  // $scope.preloadCity = function(cid) {
-  //   if (cid == 'all') {
-  //     $scope.allCities[0].selected = true
-  //   } else {
-  //     VK.api("places.getCityById", {cids: cid}, function(data) {
-  //       $scope.$apply(function() {
-  //         $scope.preloadedCity = [{
-  //           title: data.response[0].name, cid: data.response[0].cid, selected: true
-  //         }];
-  //       });
-  //     });      
-  //   };
-  // };
+
   // 
   // 
   // 

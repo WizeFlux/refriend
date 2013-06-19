@@ -1,35 +1,48 @@
 @import 'bootstrap'
 
+body
+  padding: 5px 0
+
 
 ul.dropdown-menu
   display: block
+  max-height: 500px
+  overflow: hidden
+  hr
+    margin: 0
   input
     margin: 0 5px 5px 5px
+
+.selected_tag
+  cursor: pointer
+  &:hover
+    text-decoration: line-through
+
+.tags-cloud
+  max-height: 96px
+  overflow: hidden
 
 .controls > .label
   margin-right: 4px
 
-.inviz
-  outline: none
-  border: 0
-  padding: 0
-  margin: 0
- 
-.navbar-avatar
-  height: 40px
-  width: 40px
+li.tag
+  border-radius: 2px
+  border: 1px #e3e3e3 solid
+  background: #f4f4f4
+  padding 3px 6px
+  cursor: pointer
+  margin: 0 10px 10px 0
+  color: #535353
+  &:hover
+    border-color: #a2c0dc
+    background: #dbe7f5
 
 textarea
   resize: none
 
 
-.tag-cloud
-  height: 93px
-  overflow: hidden
-
 ul.unstyled
   margin: 0
-
 
 .friends
   li

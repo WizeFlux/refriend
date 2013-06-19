@@ -9,11 +9,11 @@
     :javascript
       VK.init(function() {
         setTimeout(function(){
-          VK.callMethod("resizeWindow", 1000, document.height); 
+          VK.callMethod("resizeWindow", 800, document.height); 
         }, 2000)
       });
       currentPersonUid = "#{current_person_uid}";
 %body
-  = render 'layouts/top_bar'
+  / # = render 'layouts/top_bar'
   .container-fluid
     = yield

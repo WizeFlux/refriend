@@ -1,23 +1,20 @@
 TagsSelector = function($scope) {
   $scope.tags = [];
   $scope.comboBoxOpen = false;
-  
-  $scope.$watch('search', function(newValue, oldValue) {
-    if (newValue == undefined || newValue == '') {
-      $scope.comboBoxOpen = false;
-    } else {$scope.comboBoxOpen = true}
-  });
-  
-  $scope.toggleComboBox = function() {
-    $scope.comboBoxOpen = !$scope.comboBoxOpen;
-  };
-  
-  $scope.loadTags = function(tags) {
-    $scope.tags = tags;
-  };
+
+  $scope.loadTags = function(tags) {  $scope.tags = tags;  };
   
   $scope.select = function(tag) {
     tag.selected = true;
+    $scope.comboBoxOpen = false;
     $scope.search = '';
+  };
+  
+  $scope.selectedTags = function() {
+    return _.select($scope.tags, function(tag){  return tag.selected == true  })
+  };
+  
+  $scope.clear = function() {
+    _.each($scope.tags, function(tag){ tag.selected = false})
   };
 };

@@ -1,53 +1,42 @@
-= form_for :query, method: :get, html: {class: 'form-horizontal'} do |form|
-  .control-group{"ng-controller" => 'CitySelector'}
-    %label.control-label Город
-    .controls{"style" => "position: relative"}
-      .input-append
-        %input.span6{"type" => "text", "disabled" => true, "value" => "{{selectedCity.title}}"}
-        %button.btn{"type" => "button", "ng-click" => "toggleComboBox()"}
-          %i.icon-chevron-down{"ng-hide" => "comboBoxOpen"}
-          %i.icon-chevron-up{"ng-show" => "comboBoxOpen"}
-      %ul.dropdown-menu{"style" => "top: 27px; left: auto; width: 497px", "ng-show" => 'comboBoxOpen'}
+= form_for :query, method: :get do |form|
+  .row-fluid
+    .span2{"style" => "position: relative", "ng-controller" => 'CitySelector', "ng-init" => "preloadCity(#{current_person_cid})"}
+      %a{"href" => "#", "ng-click" => "comboBoxOpen = true"}
+        {{selectedCity.title}}
+        %i.icon-chevron-down
+      %ul.dropdown-menu{"style" => "top: -7px; left: auto", "ng-show" => 'comboBoxOpen'}
         %li
-          %input{"type" => "text", "style" => "width: 473px", "ng-model" => "search"}
+          %input{"type" => "text", "ng-model" => "search", "placeholder" => 'Введите город', "style" => "width: "}
         %li{"ng-repeat" => "city in loadedCities"}
-          %a{"href" => "#", "ng-click" => "select(city)"} {{city.title}} {{city.region}}
-  
-  
-  .control-group{"ng-controller" => 'TagsSelector', 'ng-init' => "loadTags(#{tag_list.to_json})"}
-    %label.control-label Тэги
-    .controls
-      .label{'ng-repeat' => 'tag in tags | filter: {selected: true}', 'ng-click' => 'tag.selected = false'}
-        {{tag.name}}
-        %input{'type' => 'hidden', 'value' => '{{tag.name}}', 'name' => 'query[tags][]'}
-      %span{"style" => "position: relative"}
-        %input.span3{"type" => "text", "ng-model" => "search"}
-        %ul.dropdown-menu{"style" => "top: 21px; left: auto; width: 218px", "ng-show" => 'comboBoxOpen'}
-          %li{'ng-repeat' => 'tag in tags | filter:search | filter:{selected: false}'}
-            %a{"href" => "#", "ng-click" => "select(tag)"} {{tag.name}}
+          %a{"href" => "#", "ng-click" => "select(city)"}
+            %ul.unstyled
+              %li {{city.title}}
+              %li
+                %small {{city.region}}
+          %hr
+    .span10{"ng-controller" => 'TagsSelector', 'ng-init' => "loadTags(#{tag_list.to_json})"}
+      %ul.inline
+        %li{"ng-show" => 'selectedTags().length < 1'} Поиск
+        %li.selected_tag{'ng-repeat' => 'tag in tags | filter: {selected: true}', 'ng-click' => 'tag.selected = false'} {{tag.name}}
+        %li{"style" => "position: relative", "ng-show" => "selectedTags().length < 3"}
+          %a{"href" => "#", "ng-click" => "comboBoxOpen = true"}
+            %i.icon-plus
+            Добавить Тэг
+          %ul.dropdown-menu{"style" => "top: -7px; left: auto; width: 230px", "ng-show" => 'comboBoxOpen'}
+            %li
+              %input{"type" => "text", "ng-model" => "search"}
+            %li{'ng-repeat' => 'tag in tags | filter:search | filter:{selected: false}'}
+              %a{"href" => "#", "ng-click" => "select(tag)"} {{tag.name}}
+      %ul.inline{"ng-show" => "selectedTags().length > 0"}
+        %li
+          %a{"href" => "#", "ng-click" => "clear()"} Очистить
+      %ul.inline.tags-cloud{"ng-show" => "selectedTags().length < 3"}
+        %li.tag{'ng-repeat' => 'tag in tags | filter:{selected: false}', "ng-click" => "select(tag)"} {{tag.name}}
 
-
-  %center{'ng-controller' => 'ScopeSelector', 'ng-init' => "scope = '#{scope}'"}
-    %input{'type' => 'hidden', 'name' => 'query[scope]', 'value' => '{{scope}}'}
-    .btn-group
-      %a.btn{'ng-click' => 'scope = "all"', 'ng-class' => 'activeIf("all")'} Все объявления
-      %a.btn{'ng-click' => 'scope = "friends"', 'ng-class' => 'activeIf("friends")'} Только друзей
-  
-  /     
-  /     
-  /   .row-fluid{'ng-controller' => 'TagsSelector', 'ng-init' => "loadTags(#{tag_list.to_json})"}    
-  /     .span4
-  /       %p.lead Доступные теги
-  /       .well.well-small.tag-cloud
-  /         %input.span12{'type' => 'search', 'ng-model' => 'search', 'placeholder' => 'Поиск тега'}
-  /         %ul.inline
-  /           %li{'ng-repeat' => 'tag in tags | filter:search | filter:{selected: false}'}
-  /             %span.label.label-warning{'href' => '#', 'ng-click' => 'tag.selected = true', 'style' => 'cursor: pointer'} {{tag.name}}
-  / 
-  /     .span4
-  /       %p.lead Выбранные теги
-  /       .well.well-small.tag-cloud
-  /         %ul.inline
-  /           %li{'ng-repeat' => 'tag in tags | filter: {selected: true}'}
-  /             
-  /             %span.label.label-success{'href' => '#', 'ng-click' => 'tag.selected = false', 'style' => 'cursor: pointer'} {{tag.name}}
+  .row-fluid
+    .span12
+      %center{'ng-controller' => 'ScopeSelector', 'ng-init' => "scope = '#{scope}'"}
+        %input{'type' => 'hidden', 'name' => 'query[scope]', 'value' => '{{scope}}'}
+        .btn-group
+          %a.btn{'ng-click' => 'scope = "all"', 'ng-class' => 'activeIf("all")'} Все объявления
+          %a.btn{'ng-click' => 'scope = "friends"', 'ng-class' => 'activeIf("friends")'} Только друзей
