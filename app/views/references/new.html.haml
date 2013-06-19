@@ -3,23 +3,21 @@
   
 = form_for @reference, url: task_references_path(@task) do |form|
   %fieldset.row-fluid
+    - if params[:recommended] == 'self'
+      %input{'type' => 'hidden', 'name' => 'reference[referenced_uid]', 'value' => current_person_uid}
+    - if params[:recommended] == 'friend'
+      %div{'ng-controller' => 'FriendSelect', 'ng-init' => "loadFriends(#{current_person_uid})"}
+        %p Рекоммендуемый
+        .well.well-small{'ng-show' => 'friends.length > 1'}
+          %input{'type' => 'hidden', 'name' => 'reference[referenced_uid]', 'value' => '{{selectedFriend().uid}}'}  
+          %input.span12{'type' => 'search', 'ng-model' => 'search', 'placeholder' => 'Поиск друга', 'ng-show' => "selectedFriend() == undefined"}
+          %ul.unstyled.friends
+            %li{'ng-repeat' => 'friend in friends | filter:search', 'ng-show' => 'show(friend)', 'ng-click' => "select(friend)"}
+              %img{src: '{{friend.photo}}'}
+              {{friend.first_name}} {{friend.nickname}} {{friend.last_name}}
+
     = form.label :description, 'Рекоммендация'
     = form.text_area :description, rows: 6, class: 'span12'
-    = form.hidden_field :referenced_uid, value: current_person_uid
-
-    %div{'ng-controller' => 'FriendSelect'}
-      %a{'ng-click' => "loadFriends(#{current_person_uid})", 'href' => '#', 'ng-hide' => 'friends.length > 1'} Рекоммендовать друга
-      %p{'ng-show' => 'friends.length > 1'} Рекоммендуемый
-      .well.well-small{'ng-show' => 'friends.length > 1'}
-        %div{'ng-switch' => true, 'on' => 'selectedFriend()'}
-          %input{'ng-switch-default' => true, 'type' => 'hidden', 'name' => 'reference[referenced_uid]', 'value' => '{{selectedFriend().uid}}'}
-          %input{'ng-switch-when' => 'undefined', 'type' => 'hidden', 'name' => 'reference[referenced_uid]', 'value' => current_person_uid}
-        %input.span12{'type' => 'search', 'ng-model' => 'search', 'placeholder' => 'Поиск друга', 'ng-show' => 'displaySearch()'}
-        %ul.unstyled.friends
-          %li{'ng-repeat' => 'friend in friends | filter:search', 'ng-show' => 'show(friend)', 'ng-click' => "select(friend)"}
-            %img{src: '{{friend.photo}}'}
-            {{friend.first_name}} {{friend.nickname}} {{friend.last_name}}
-      %a{'ng-click' => 'friends = []', 'ng-show' => 'friends.length > 1', 'href' => '#'} Рекоммендовать себя
 
   .form-actions
     = form.submit 'Опубликовать', class: 'btn btn-primary'

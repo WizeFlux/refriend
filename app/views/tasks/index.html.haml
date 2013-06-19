@@ -5,7 +5,7 @@
   %hr
   .pull-right= link_to 'Добавить объявление', new_task_path, class: 'btn btn-primary'
   %p.lead Порекоммендуйте друга...
-
+  
   %div{'ng-controller' => 'Static'}
     %a.row-fluid.task{"ng-repeat" => "task in tasks", "href" => "/tasks/{{task.id.$oid}}"}
       .span2
@@ -15,7 +15,6 @@
           %li
             %i.icon-map-marker
             {{city(task.cid).name}}
-
         %ul.inline
           %li
             {{person(task.requester_uid).first_name}}
@@ -29,8 +28,7 @@
             {{task.date}}
         %ul.inline
           %li
-            %p.lead {{task.title}}
-
+            %h4 {{task.title}}
         %ul.inline.tags-cloud
           %li.tag{'ng-repeat' => 'tag in task.tags'} {{tag}}
     

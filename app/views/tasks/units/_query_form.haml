@@ -1,10 +1,10 @@
 = form_for :query, method: :get do |form|
   .row-fluid
-    .span4{"style" => "position: relative", "ng-init" => "preloadCity(#{current_person_cid})"}
-      %a{"href" => "#", "ng-click" => "cityComboBoxOpen = true"}
+    .span3{"style" => "position: relative", "ng-init" => "preloadCity(#{current_person_cid})"}
+      %a.btn{"href" => "#", "ng-click" => "cityComboBoxOpen = true"}
         {{selectedCity.title}}
         %i.icon-chevron-down
-      %ul.dropdown-menu{"style" => "top: -7px; left: auto", "ng-show" => 'cityComboBoxOpen'}
+      %ul.dropdown-menu{"style" => "top: -2px; left: auto", "ng-show" => 'cityComboBoxOpen'}
         %li
           %input{"type" => "text", "ng-model" => "citySearch", "placeholder" => 'Введите город', "style" => "width: "}
         %li{"ng-repeat" => "city in loadedCities"}
@@ -16,29 +16,26 @@
           %hr
           
           
-
-  .row-fluid
-    .span12{'ng-init' => "loadTags(#{tag_list.to_json})"}
+    .span8{'ng-init' => "loadTags(#{tag_list.to_json})"}
       %ul.inline
-        %li{"ng-show" => 'selectedTags.length < 1'} Поиск
+        %li.selected_tag{"ng-show" => 'selectedTags.length < 1'} Поиск
         %li.selected_tag{'ng-repeat' => 'tag in selectedTags', 'ng-click' => 'deselectTag(tag)'} {{tag}}
         %li{"style" => "position: relative", "ng-show" => "selectedTags.length < 3"}
-          %a{"href" => "#", "ng-click" => "tagComboBoxOpen = true"}
+          %a.btn{"href" => "#", "ng-click" => "tagComboBoxOpen = true"}
             %i.icon-plus
-            Добавить Тэг
-          %ul.dropdown-menu{"style" => "top: -7px; left: auto; width: 230px", "ng-show" => 'tagComboBoxOpen'}
+          %ul.dropdown-menu{"style" => "top: -2px; left: auto; width: 230px", "ng-show" => 'tagComboBoxOpen'}
             %li
               %input{"type" => "text", "ng-model" => "tagSearch"}
-            %li{'ng-repeat' => 'tag in tags | filter:tagSearch | filter:{selected: false}'}
+            %li{'ng-repeat' => 'tag in tags | filter:tagSearch'}
               %a{"href" => "#", "ng-click" => "selectTag(tag)"} {{tag}}
-      %ul.inline{"ng-show" => "selectedTags.length > 0"}
-        %li
-          %a{"href" => "#", "ng-click" => "clearTags()"} Очистить
-      %ul.inline.tags-cloud{"ng-show" => "selectedTags.length < 3"}
-        %li.tag{'ng-repeat' => 'tag in tags', "ng-click" => "selectTag(tag)"} {{tag}}
+        %li{"ng-show" => "selectedTags.length > 0"}
+          %a.btn{"href" => "#", "ng-click" => "clearTags()"}
+            %i.icon-trash
 
-
-
+  %hr
+  .row-fluid
+    %ul.inline.tags-cloud{"ng-show" => "selectedTags.length < 3"}
+      %li.tag{'ng-repeat' => 'tag in tags', "ng-click" => "selectTag(tag)"} {{tag}}
 
   .row-fluid
     .span12

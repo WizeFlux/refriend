@@ -22,9 +22,4 @@
         {{person(#{reference.referenced_uid}).nickname}}
         {{person(#{reference.referenced_uid}).last_name}}
   
-  .span6
-    - if reference.referencer_uid == current_person_uid
-      = form_for reference, method: :delete, html: {class: 'pull-right'} do |form|
-        = form.submit 'x', class: 'btn btn-danger btn-mini'
-  
-    = reference.description
+  .span6= reference.description

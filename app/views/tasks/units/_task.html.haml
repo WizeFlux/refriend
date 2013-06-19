@@ -1,35 +1,40 @@
-.row-fluid.thumbnail
+.row-fluid
   .span2
     %img{src: "{{person(#{task.requester_uid}).photo_big}}"}
-
   .span10
     %ul.inline.pull-right
       %li
-        %i.icon-eye-open
-        = task.views_count
+        %i.icon-map-marker
+        {{city(#{task.cid}).name}}
+    %ul.inline
       %li
-        %i.icon-user
-        = task.references.count
+        %a{href: "http://vk.com/id#{task.requester_uid}", target: "_blank"}
+          {{person(#{task.requester_uid}).first_name}}
+          {{person(#{task.requester_uid}).nickname}}
+          {{person(#{task.requester_uid}).last_name}}
       %li
         %i.icon-time
         = task.created_at.strftime('%H:%M')
       %li
         %i.icon-calendar
         = task.created_at.strftime('%d/%m/%y')
+    %ul.inline
       %li
-        %i.icon-map-marker
-        - if task.cid == 'all'
-          Все города
-        - else
-          {{city(#{task.cid}).name}}
-    %a{'href' => "http://vk.com/id#{task.requester_uid}", 'target' => '_blank'}
-      {{person(#{task.requester_uid}).first_name}}
-      {{person(#{task.requester_uid}).nickname}}
-      {{person(#{task.requester_uid}).last_name}}
-    
-    %h4= link_to task.title, task_path(task)  
-
-    %p
+        %h4= task.title
+    %ul.inline.tags-cloud
       - task.tags.each do |tag|
-        .label= tag
-%br
+        %li.tag= tag
+
+.row-fluid
+  %center
+    %p.btn-group
+      %a.btn.disabled
+        %i.icon-eye-open
+        = task.views_count
+      %a.btn.disabled
+        %i.icon-user
+        = task.references.count
+      
+.row-fluid
+  %p= task.description
+= render 'tasks/units/task_menu', task: task

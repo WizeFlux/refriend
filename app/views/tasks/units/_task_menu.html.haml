@@ -3,6 +3,12 @@
     - if task.requester_uid == current_person_uid
       = form.submit 'Удалить', class: 'btn btn-primary'
       = link_to 'Редактировать', edit_task_path(task), class: 'btn btn-primary'
-    = link_to 'Рекоммендовать', new_task_reference_path(task), class: 'btn btn-primary'
+    = link_to 'Рекоммендовать себя', new_task_reference_path(task, recommended: 'self'), class: ('btn btn-primary' + active_if(params[:recommended] == 'self'))
+    = link_to 'Рекоммендовать друга', new_task_reference_path(task, recommended: 'friend'), class: ('btn btn-primary' + active_if(params[:recommended] == 'friend'))
+    %br
+    %br
+    = link_to root_url do
+      Вернуться к списку объявлений
+      %i.icon-arrow-left
   
     
