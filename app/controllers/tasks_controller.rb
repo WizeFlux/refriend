@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
   before_filter :new_task, only: %w(create new)
   before_filter :find_task, only: %w(show edit destroy update)
-  before_filter :find_tasks, only: %w(index)
-
+  before_filter :find_tasks, only: %w(index json)
+  protect_from_forgery except: %w(json)
   helper_method :tag_list, :query, :scope, :selected_tags
     
   def new_task;     @task = Task.new task_params;  end
@@ -12,16 +12,36 @@ class TasksController < ApplicationController
   def show;         @task.view!;  end
   def destroy;      @task.destroy ? redirect_to(root_url) : render(text: 'faild');  end
   
+  def json
+    render json: {
+      pagination: {
+        pages: @tasks.total_pages,
+        page: @tasks.current_page
+      }, 
+      tasks: @tasks.map{|t| {
+        requester_uid: t.requester_uid,
+        time: t.created_at.strftime('%H:%M'),
+        date: t.created_at.strftime('%d/%m/%y'),
+        title: t.title,
+        cid: t.cid,
+        id: t.id,
+        tags: t.tags
+      }}
+    }.to_json
+  end
+  
   def find_tasks
     @tasks = Task.page(params[:page]).per(5)
+    @tasks = @tasks.tagged_with_all(selected_tags) unless selected_tags.blank?
+    @tasks = @tasks.where(cid: cid) if cid
   end
   
   def tag_list
-    Task.tag_list.collect do |tag|
-      {  name: tag, selected: selected_tags.include?(tag)  }
-    end
+    Task.tag_list
   end
   
+  
+  def cid;              (query && query[:cid]) ? query[:cid] : nil;  end
   def scope;            (query && query[:scope]) ? query[:scope] : 'all';  end
   def selected_tags;    (query && query[:tags]) ? query[:tags] : [];  end
   def query;            params[:query];  end

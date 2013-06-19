@@ -1,12 +1,36 @@
-= render 'tasks/units/query_form'
+%div{'ng-controller' => 'QueryForm'}
 
-%hr
-.pull-right
-  = link_to 'Добавить объявление', new_task_path, class: 'btn btn-primary'
-%p.lead Порекоммендуйте друга...
-%div{'ng-controller' => 'Static'}
-  = paginate @tasks
-  - @tasks.each do |task|
-    = render 'tasks/units/task', task: task
-  = paginate @tasks
-      
+  = render 'tasks/units/query_form'
+
+  %hr
+  .pull-right= link_to 'Добавить объявление', new_task_path, class: 'btn btn-primary'
+  %p.lead Порекоммендуйте друга...
+
+  %div{'ng-controller' => 'Static'}
+    %a.row-fluid.task{"ng-repeat" => "task in tasks", "href" => "/tasks/{{task.id.$oid}}"}
+      .span2
+        %img{src: "{{person(task.requester_uid).photo_big}}"}
+      .span10
+        %ul.inline.pull-right
+          %li
+            %i.icon-map-marker
+            {{city(task.cid).name}}
+
+        %ul.inline
+          %li
+            {{person(task.requester_uid).first_name}}
+            {{person(task.requester_uid).nickname}}
+            {{person(task.requester_uid).last_name}}
+          %li
+            %i.icon-time
+            {{task.time}}
+          %li
+            %i.icon-calendar
+            {{task.date}}
+        %ul.inline
+          %li
+            %p.lead {{task.title}}
+
+        %ul.inline.tags-cloud
+          %li.tag{'ng-repeat' => 'tag in task.tags'} {{tag}}
+    
