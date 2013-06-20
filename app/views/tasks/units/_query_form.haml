@@ -17,25 +17,14 @@
           
           
     .span8{'ng-init' => "loadTags(#{tag_list.to_json})"}
-      %ul.inline
-        %li.selected_tag{"ng-show" => 'selectedTags.length < 1'} Поиск
-        %li.selected_tag{'ng-repeat' => 'tag in selectedTags', 'ng-click' => 'deselectTag(tag)'} {{tag}}
-        %li{"style" => "position: relative", "ng-show" => "selectedTags.length < 3"}
-          %a.btn{"href" => "#", "ng-click" => "tagComboBoxOpen = true"}
-            %i.icon-plus
-          %ul.dropdown-menu{"style" => "top: -2px; left: auto; width: 230px", "ng-show" => 'tagComboBoxOpen'}
-            %li
-              %input{"type" => "text", "ng-model" => "tagSearch"}
-            %li{'ng-repeat' => 'tag in tags | filter:tagSearch'}
-              %a{"href" => "#", "ng-click" => "selectTag(tag)"} {{tag}}
-        %li{"ng-show" => "selectedTags.length > 0"}
-          %a.btn{"href" => "#", "ng-click" => "clearTags()"}
-            %i.icon-trash
-
-  %hr
-  .row-fluid
-    %ul.inline.tags-cloud{"ng-show" => "selectedTags.length < 3"}
-      %li.tag{'ng-repeat' => 'tag in tags', "ng-click" => "selectTag(tag)"} {{tag}}
+      %span.selected_tag{'ng-repeat' => 'tag in selectedTags', 'ng-click' => 'deselectTag(tag)'} {{tag}}
+      %a{"href" => "#", "ng-click" => "clearTags()", "ng-show" => "selectedTags.length > 0"}Очистить
+  %br
+  .row-fluid{"ng-show" => "selectedTags.length < 3"}
+    %input.span12{"type" => "text", "ng-model" => "tagSearch", "placeholder" => "Поиск тега"}
+  .row-fluid{"ng-show" => "selectedTags.length < 3"}
+    %ul.inline.tags-cloud
+      %li.tag{'ng-repeat' => 'tag in tags | filter:tagSearch', "ng-click" => "selectTag(tag)"} {{tag}}
 
   .row-fluid
     .span12

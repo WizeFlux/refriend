@@ -15,9 +15,17 @@ ul.dropdown-menu
 
 .selected_tag
   cursor: pointer
-  //font-size: 24px
+  font-size: 24px
+  line-height: 24px
+  margin-right: 10px
   &:hover
     text-decoration: line-through
+  &:not(:first-child)
+    &:before
+      content: '+ '
+      font-weight: bold
+      display: inline
+      text-decoration: none !important
 
 .task
   display: block
