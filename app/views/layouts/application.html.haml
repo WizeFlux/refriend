@@ -10,10 +10,9 @@
       VK.init(function() {
         setTimeout(function(){
           VK.callMethod("resizeWindow", 800, document.height); 
-        }, 2000)
+        }, 2500)
       });
       currentPersonUid = "#{current_person_uid}";
 %body{'ng-controller' => 'Static'}
-  / # = render 'layouts/top_bar'
   .container-fluid
     = yield

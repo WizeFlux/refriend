@@ -1,0 +1,39 @@
+
+%div.row-fluid.task
+  %a.span2.text-center{'href' => "http://vk.com/id#{reference.referenced_uid}", 'target' => '_blank'}
+    %br
+    %img{src: "{{person(#{reference.referenced_uid}).photo}}"}
+    %br
+    {{person(#{reference.referenced_uid}).first_name}}
+    {{person(#{reference.referenced_uid}).nickname}}
+    {{person(#{reference.referenced_uid}).last_name}}
+  .span1
+    %br
+    %br
+    %i.icon-arrow-right
+  .span2
+    %img{src: "{{person(#{reference.task.requester_uid}).photo_big}}"}
+  %a.span7{href: task_path(reference.task)}
+    %ul.inline.pull-right
+      %li
+        %i.icon-map-marker
+        {{city(#{reference.task.cid}).name}}
+    %ul.inline
+      %li
+        {{person(#{reference.task.requester_uid}).first_name}}
+        {{person(#{reference.task.requester_uid}).nickname}}
+        {{person(#{reference.task.requester_uid}).last_name}}
+      %li
+        %i.icon-time
+        = reference.task.created_at.strftime('%H:%M')
+      %li
+        %i.icon-calendar
+        = reference.task.created_at.strftime('%d/%m/%y')
+    %ul.inline
+      %li
+        %h4= reference.task.title
+    %ul.inline.tags-cloud
+      - reference.task.tags.each do |tag|
+        %li.tag= tag
+
+    

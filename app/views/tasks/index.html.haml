@@ -6,7 +6,6 @@
     .pull-right= link_to 'Добавить объявление', new_task_path, class: 'btn btn-primary'
     %p.lead Мои объявления
 
-  = render 'tasks/units/pager'  
   %div
     %a.row-fluid.task{"ng-repeat" => "task in tasks", "href" => "/tasks/{{task.id.$oid}}"}
       .span2
@@ -33,3 +32,6 @@
         %ul.inline.tags-cloud
           %li.tag{'ng-repeat' => 'tag in task.tags'} {{tag}}
   = render 'tasks/units/pager'
+  
+  - if scope == 'own'
+    = render 'layouts/back'

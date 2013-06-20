@@ -31,9 +31,10 @@ class TasksController < ApplicationController
   end
   
   def find_tasks
-    @tasks = Task.page(params[:page]).per(5)
+    @tasks = Task.page(params[:page]).per(7)
     @tasks = @tasks.tagged_with_all(selected_tags) unless selected_tags.blank?
     @tasks = @tasks.where(cid: cid) if cid
+    @tasks = @tasks.where(requester_uid: current_person_uid) if scope == 'own'
   end
   
   def tag_list
