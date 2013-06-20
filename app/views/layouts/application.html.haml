@@ -13,7 +13,7 @@
         }, 2000)
       });
       currentPersonUid = "#{current_person_uid}";
-%body
+%body{'ng-controller' => 'Static'}
   / # = render 'layouts/top_bar'
   .container-fluid
     = yield

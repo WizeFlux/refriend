@@ -1,0 +1,6 @@
+.pager
+  %li{"ng-class" => "disabledIf(page == 1)"}
+    %a{"href" => "#", "ng-click" => "pageDown()"} Предидущая
+  %li Страница {{page}} из {{pages}}
+  %li{"ng-class" => "disabledIf(page == pages)"}
+    %a{"href" => "#", "ng-click" => "pageUp()"} Следующая

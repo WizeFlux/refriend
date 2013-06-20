@@ -1,19 +1,13 @@
 %div{'ng-controller' => 'QueryForm'}
 
-  = render 'tasks/units/query_form'
+  - if scope == 'own'
+    = render 'tasks/units/query_form'
+  - else
+    .pull-right= link_to 'Добавить объявление', new_task_path, class: 'btn btn-primary'
+    %p.lead Мои объявления
 
-  %hr
-  .pull-right= link_to 'Добавить объявление', new_task_path, class: 'btn btn-primary'
-  %p.lead Порекоммендуйте друга...
-  
-  .pager
-    %li{"ng-class" => "disabledIf(page == 1)"}
-      %a{"href" => "#", "ng-click" => "pageDown()"} Предидущая
-    %li Страница {{page}} из {{pages}}
-    %li{"ng-class" => "disabledIf(page == pages)"}
-      %a{"href" => "#", "ng-click" => "pageUp()"} Следующая
-  
-  %div{'ng-controller' => 'Static'}
+  = render 'tasks/units/pager'  
+  %div
     %a.row-fluid.task{"ng-repeat" => "task in tasks", "href" => "/tasks/{{task.id.$oid}}"}
       .span2
         %img{src: "{{person(task.requester_uid).photo_big}}"}
@@ -38,9 +32,4 @@
             %h4 {{task.title}}
         %ul.inline.tags-cloud
           %li.tag{'ng-repeat' => 'tag in task.tags'} {{tag}}
-  .pager
-    %li{"ng-class" => "disabledIf(page == 1)"}
-      %a{"href" => "#", "ng-click" => "pageDown()"} Предидущая
-    %li Страница {{page}} из {{pages}}
-    %li{"ng-class" => "disabledIf(page == pages)"}
-      %a{"href" => "#", "ng-click" => "pageUp()"} Следующая
+  = render 'tasks/units/pager'

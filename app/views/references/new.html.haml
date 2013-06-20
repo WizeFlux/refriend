@@ -7,7 +7,7 @@
       %input{'type' => 'hidden', 'name' => 'reference[referenced_uid]', 'value' => current_person_uid}
     - if params[:recommended] == 'friend'
       %div{'ng-controller' => 'FriendSelect', 'ng-init' => "loadFriends(#{current_person_uid})"}
-        %p Рекоммендуемый
+        %p Рекомендовать друга
         .well.well-small{'ng-show' => 'friends.length > 1'}
           %input{'type' => 'hidden', 'name' => 'reference[referenced_uid]', 'value' => '{{selectedFriend().uid}}'}  
           %input.span12{'type' => 'search', 'ng-model' => 'search', 'placeholder' => 'Поиск друга', 'ng-show' => "selectedFriend() == undefined"}
@@ -16,9 +16,9 @@
               %img{src: '{{friend.photo}}'}
               {{friend.first_name}} {{friend.nickname}} {{friend.last_name}}
 
-    = form.label :description, 'Рекоммендация'
+    = form.label :description, 'Комментарий'
     = form.text_area :description, rows: 6, class: 'span12'
 
   .form-actions
-    = form.submit 'Опубликовать', class: 'btn btn-primary'
+    = form.submit 'Рекомендовать', class: 'btn btn-primary'
     = link_to 'Отмена', task_path(@task), class: 'btn'  

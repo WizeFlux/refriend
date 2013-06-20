@@ -1,5 +1,5 @@
 QueryForm = function($scope, $http) {
-  $scope.scope = 'all';
+  $scope.userMenuOpen = false
   
   $scope.loadedCities = [];
   $scope.selectedCity = {};

@@ -20,7 +20,17 @@
     .span8{'ng-init' => "loadTags(#{tag_list.to_json})"}
       %span.selected_tag{'ng-repeat' => 'tag in selectedTags', 'ng-click' => 'deselectTag(tag)'} {{tag}}
       %a{"href" => "#", "ng-click" => "clearTags()", "ng-show" => "selectedTags.length > 0"}Очистить
-  
+    .span1
+      .btn-group
+        %a.btn-user.btn.dropdown-toggle{"href" => "#", "ng-click" => "userMenuOpen = !userMenuOpen", "ng-class" => "activeIf(userMenuOpen)"}
+          %img{"src" => "{{person(#{current_person_uid}).photo}}"}
+          %span.caret
+        %ul.dropdown-menu{"style" => true, "ng-show" => 'userMenuOpen', "style" => "right: 0; left: auto"}
+          %li
+            %a{"href" => root_path(query: {scope: 'own'})} Мои объявления
+          %li
+            %a{"href" => references_path} Мои рекомендации
+      
   %br
   
   .row-fluid{"ng-show" => "selectedTags.length < 3"}
@@ -32,6 +42,12 @@
     .span12
       %center{'ng-init' => "scope = '#{scope}'"}
         %input{'type' => 'hidden', 'name' => 'query[scope]', 'value' => '{{scope}}'}
-        .btn-group
+        .btn-group{"ng-init" => "scope = 'all'"}
           %a.btn{'ng-click' => 'scope = "all"', 'ng-class' => 'activeIf("all" == scope)'} Все объявления
           %a.btn{'ng-click' => 'scope = "friends"', 'ng-class' => 'activeIf("friends" == scope)'} Только друзей
+          
+          
+          
+%hr
+.pull-right= link_to 'Добавить объявление', new_task_path, class: 'btn btn-primary'
+%p.lead Порекоммендуйте друга...
