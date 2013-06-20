@@ -14,26 +14,39 @@ QueryForm = function($scope, $http) {
   $scope.page = 1;
   
   $scope.$watch('citySearch', function(newValue, oldValue) {  $scope.loadCities()  });
-  $scope.$watch('selectedCity', function(newValue, oldValue) {  $scope.listUpdate()  });
-  $scope.$watch('scope', function(newValue, oldValue) {  $scope.listUpdate()  });
-  $scope.$watch('selectedTags', function(newValue, oldValue) {  $scope.listUpdate()  });
+  $scope.$watch('selectedCity', function(newValue, oldValue) {  $scope.listUpdate(1)  });
+  $scope.$watch('scope', function(newValue, oldValue) {  $scope.listUpdate(1)  });
+  $scope.$watch('selectedTags', function(newValue, oldValue) {  $scope.listUpdate(1)  });
+  $scope.$watch('page', function(newValue, oldValue) {  $scope.listUpdate(newValue)  });
 
-  $scope.listUpdate = function() {
-    $http.post('tasks/json', {query:{
+  $scope.listUpdate = function(page) {
+    $http.post('tasks/json', {page: page, query:{
       cid: $scope.selectedCity.cid,
       scope: $scope.scope,
       tags: $scope.selectedTags
     }}).success(function(data){
       $scope.tasks = data.tasks;
-      console.log(data.tasks)
       $scope.pages = data.pagination.pages;
       $scope.page = data.pagination.page;
     });
   };
   
-  $scope.activeIf = function(value) {
-    if (value == $scope.scope) {return 'active'} else {return ''}
+  $scope.pageUp = function() {
+    if ($scope.page != $scope.pages) {$scope.page = $scope.page + 1}
   };
+  
+  $scope.pageDown = function() {
+    if ($scope.page != 1) {$scope.page = $scope.page - 1}
+  };
+  
+  $scope.activeIf = function(condition) {
+    if (condition) {return ' active'} else {return ''}
+  };
+
+  $scope.disabledIf = function(condition) {
+    if (condition) {return ' disabled'} else {return ''}
+  };
+
 
   $scope.selectCity = function(city) {
     $scope.selectedCity = city;

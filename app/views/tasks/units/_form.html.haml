@@ -1,16 +1,24 @@
 = form_for task do |form|
   %fieldset.row-fluid
-
+    .btn-group{"style" => "position: relative", "ng-init" => "preloadCity(#{current_person_cid})", 'ng-controller' => 'CitySelector'}
+      %a.btn.dropdown-toggle{"href" => "#", "ng-click" => "cityComboBoxOpen = !cityComboBoxOpen", "ng-class" => "activeIf(cityComboBoxOpen)"}
+        %input{"type" => "hidden", "value" => "{{selectedCity.cid}}", "name" => "task[cid]"}
+        {{selectedCity.title}}
+        %span.caret
+      %ul.dropdown-menu{"style" => true, "ng-show" => 'cityComboBoxOpen'}
+        %li
+          %input{"type" => "text", "ng-model" => "citySearch", "placeholder" => 'Введите город', "style" => "width: "}
+        %li{"ng-repeat" => "city in loadedCities"}
+          %a{"href" => "#", "ng-click" => "selectCity(city)"}
+            %ul.unstyled
+              %li {{city.title}}
+              %li
+                %small {{city.region}}
+          %hr
+    %br
+    %br
     = form.label :title, 'Название'
     = form.text_field :title, class: 'span12'
-
-    = form.label 'Город'
-    .well.well-small{'ng-controller' => 'CitySelector', 'ng-init' => "preloadCity('#{task.cid || current_person_cid}')"}    
-      %input{'type' => 'hidden', 'name' => 'task[cid]', 'value' => '{{selectedCity().cid}}'}
-      %input.span12{'type' => 'search', 'ng-model' => 'search', 'ng-show' => 'displaySearch()', 'placeholder' => 'Поиск города'}
-      %ul.unstyled
-        %li{'ng-repeat' => 'city in cities()', 'ng-hide' => 'hide(city)'}
-          %a{'href' => '#', 'ng-click' => 'select(city)'} {{city.title}} {{city.region}} {{city.area}}
 
     = form.label :description, 'Описание'
     = form.text_area :description, rows: 6, class: 'span12'

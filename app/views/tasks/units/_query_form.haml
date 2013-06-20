@@ -1,35 +1,37 @@
 = form_for :query, method: :get do |form|
   .row-fluid
     .span3{"style" => "position: relative", "ng-init" => "preloadCity(#{current_person_cid})"}
-      %a.btn{"href" => "#", "ng-click" => "cityComboBoxOpen = true"}
-        {{selectedCity.title}}
-        %i.icon-chevron-down
-      %ul.dropdown-menu{"style" => "top: -2px; left: auto", "ng-show" => 'cityComboBoxOpen'}
-        %li
-          %input{"type" => "text", "ng-model" => "citySearch", "placeholder" => 'Введите город', "style" => "width: "}
-        %li{"ng-repeat" => "city in loadedCities"}
-          %a{"href" => "#", "ng-click" => "selectCity(city)"}
-            %ul.unstyled
-              %li {{city.title}}
-              %li
-                %small {{city.region}}
-          %hr
+      .btn-group
+        %a.btn.dropdown-toggle{"href" => "#", "ng-click" => "cityComboBoxOpen = !cityComboBoxOpen", "ng-class" => "activeIf(cityComboBoxOpen)"}
+          {{selectedCity.title}}
+          %span.caret
+        %ul.dropdown-menu{"style" => true, "ng-show" => 'cityComboBoxOpen'}
+          %li
+            %input{"type" => "text", "ng-model" => "citySearch", "placeholder" => 'Введите город', "style" => "width: "}
+          %li{"ng-repeat" => "city in loadedCities"}
+            %a{"href" => "#", "ng-click" => "selectCity(city)"}
+              %ul.unstyled
+                %li {{city.title}}
+                %li
+                  %small {{city.region}}
+            %hr
           
           
     .span8{'ng-init' => "loadTags(#{tag_list.to_json})"}
       %span.selected_tag{'ng-repeat' => 'tag in selectedTags', 'ng-click' => 'deselectTag(tag)'} {{tag}}
       %a{"href" => "#", "ng-click" => "clearTags()", "ng-show" => "selectedTags.length > 0"}Очистить
+  
   %br
+  
   .row-fluid{"ng-show" => "selectedTags.length < 3"}
     %input.span12{"type" => "text", "ng-model" => "tagSearch", "placeholder" => "Поиск тега"}
   .row-fluid{"ng-show" => "selectedTags.length < 3"}
     %ul.inline.tags-cloud
       %li.tag{'ng-repeat' => 'tag in tags | filter:tagSearch', "ng-click" => "selectTag(tag)"} {{tag}}
-
   .row-fluid
     .span12
       %center{'ng-init' => "scope = '#{scope}'"}
         %input{'type' => 'hidden', 'name' => 'query[scope]', 'value' => '{{scope}}'}
         .btn-group
-          %a.btn{'ng-click' => 'scope = "all"', 'ng-class' => 'activeIf("all")'} Все объявления
-          %a.btn{'ng-click' => 'scope = "friends"', 'ng-class' => 'activeIf("friends")'} Только друзей
+          %a.btn{'ng-click' => 'scope = "all"', 'ng-class' => 'activeIf("all" == scope)'} Все объявления
+          %a.btn{'ng-click' => 'scope = "friends"', 'ng-class' => 'activeIf("friends" == scope)'} Только друзей
