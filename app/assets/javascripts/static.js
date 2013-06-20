@@ -24,7 +24,7 @@ Static = function($scope) {
           $scope.$apply(function(){  $scope.people = data.response  });
         }); 
       };
-    }, 500);
+    }, 1500);
   });
   
   $scope.$watch('cities_cids', function(newValue, oldValue) {
@@ -34,6 +34,6 @@ Static = function($scope) {
           $scope.$apply(function() {  $scope.cities = data.response  });
         });
       };
-    }, 500);
+    }, 1500);
   });
 };
