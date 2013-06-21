@@ -23,7 +23,7 @@ Static = function($scope) {
             $scope.people_loading = false;
           });
         });
-      }, 300);      
+      }, 1000);      
     }
   });
 
@@ -52,7 +52,7 @@ Static = function($scope) {
             $scope.cities_loading = false;
           });
         });
-      }, 300);      
+      }, 1000);      
     }
   });
 };
