@@ -54,9 +54,19 @@ QueryForm = function($scope, $http) {
   };
 
   $scope.preloadCity = function(cid) {
-    VK.api("places.getCityById", {cids: cid}, function(data) {
-      $scope.selectCity({  title: data.response[0].name, cid: data.response[0].cid  });
-    });      
+    if (cid != undefined) {
+      VK.api("places.getCityById", {cids: cid}, function(data) {
+        $scope.selectCity({  title: data.response[0].name, cid: data.response[0].cid  });
+        $scope.$digest();
+      });
+    } else {
+      VK.api("users.get", {uids: currentPersonUid, fields: "city"}, function(data) {
+        VK.api("places.getCityById", {cids: data.response[0].city}, function(data) {
+          $scope.selectCity({  title: data.response[0].name, cid: data.response[0].cid  });
+          $scope.$digest();
+        });
+      });
+    }
   };
   
   $scope.loadCities = function() {
