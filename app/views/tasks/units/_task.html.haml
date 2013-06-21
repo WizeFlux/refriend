@@ -20,7 +20,7 @@
         = task.created_at.strftime('%d/%m/%y')
     %ul.inline
       %li
-        %h4= task.title
+        %p.lead= task.title
     %ul.inline.tags-cloud
       - task.tags.each do |tag|
         %li.tag= tag

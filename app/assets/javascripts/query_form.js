@@ -7,7 +7,6 @@ QueryForm = function($scope, $http) {
   
   $scope.tags = [];
   $scope.selectedTags = [];
-  $scope.tagComboBoxOpen = false;
   
   $scope.tasks = [];
   $scope.pages = 0;

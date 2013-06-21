@@ -24,16 +24,20 @@
     = form.text_area :description, rows: 6, class: 'span12'
     
     = form.label :tag_list, 'Список тегов'
-    %div{'ng-controller' => 'TagInput', 'ng-init' => "tags = #{task.tags}"}
+    %div{'ng-controller' => 'TagInput', 'ng-init' => "loadTags(#{tag_list.to_json})"}
+      = form.hidden_field :tag_list, value: "{{selectedTags.join()}}"
+      .span12{'ng-init' => "selectedTags = #{task.tags}"}
+        %span.selected_tag{'ng-repeat' => 'tag in selectedTags', 'ng-click' => 'deselectTag(tag)'} {{tag}}
+        %a{"href" => "#", "ng-click" => "clearTags()", "ng-show" => "selectedTags.length > 0"}Очистить
       .input-append
-        = form.hidden_field :tag_list, value: '{{tags.join()}}'
-        %input.span12{"type" => "text", "ng-model" => "tagInput", "placeholder" => 'Добавьте новый тег'}
-        %a.btn{"href" => "#", 'ng-click' => 'add(tagInput)'}
-          %i.icon-plus
-      %ul.inline.tags-cloud
-        %li.tag{'ng-repeat' => 'tag in tags', 'ng-click' => 'remove(tag)'} {{tag}}
-
-    
+      .row-fluid{"ng-show" => "selectedTags.length < 3"}
+        .input-append
+          %input{"type" => "text", "ng-model" => "tagSearch", "placeholder" => "Поиск тега"}
+          %a.btn{"href" => "#", 'ng-click' => 'add(tagSearch)'}
+            %i.icon-plus
+      .row-fluid{"ng-show" => "selectedTags.length < 3"}
+        %ul.inline.tags-cloud
+          %li.tag{'ng-repeat' => 'tag in tags | filter:tagSearch', "ng-click" => "selectTag(tag)"} {{tag}}
 
   .form-actions
     = form.submit 'Опубликовать', class: 'btn btn-primary'

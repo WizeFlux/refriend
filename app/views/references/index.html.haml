@@ -3,7 +3,7 @@
   = render 'references/units/my_reference', reference: reference
 
 %p.lead Меня рекоммендуют
-- @references.where(:referenced_uid => current_person_uid, :referencer_uid.ne => current_person_uid).each do |reference|
+- @references.where(:referenced_uid => current_person_uid).each do |reference|
   = render 'references/units/my_reference', reference: reference
 
 = render "layouts/back"

@@ -28,7 +28,7 @@
             {{task.date}}
         %ul.inline
           %li
-            %h4 {{task.title}}
+            %p.lead {{task.title}}
         %ul.inline.tags-cloud
           %li.tag{'ng-repeat' => 'tag in task.tags'} {{tag}}
   = render 'tasks/units/pager'
