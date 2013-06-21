@@ -5,7 +5,7 @@ TagInput = function($scope) {
   
   $scope.add = function(tag) {
     $scope.selectedTags = _.union($scope.selectedTags, [tag]);
-    $scope.tagInput = '';
+    $scope.tagSearch = '';
   };
   
   $scope.loadTags = function(tags) {  $scope.tags = tags  };
