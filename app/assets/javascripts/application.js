@@ -4,3 +4,4 @@
 //= require static
 //= require city_selector
 //= require query_form
+//= require tag_input

@@ -24,7 +24,16 @@
     = form.text_area :description, rows: 6, class: 'span12'
     
     = form.label :tag_list, 'Список тегов'
-    = form.text_field :tag_list, class: 'span12'
+    %div{'ng-controller' => 'TagInput', 'ng-init' => "tags = #{task.tags}"}
+      .input-append
+        = form.hidden_field :tag_list, value: '{{tags.join()}}'
+        %input.span12{"type" => "text", "ng-model" => "tagInput", "placeholder" => 'Добавьте новый тег'}
+        %a.btn{"href" => "#", 'ng-click' => 'add(tagInput)'}
+          %i.icon-plus
+      %ul.inline.tags-cloud
+        %li.tag{'ng-repeat' => 'tag in tags', 'ng-click' => 'remove(tag)'} {{tag}}
+
+    
 
   .form-actions
     = form.submit 'Опубликовать', class: 'btn btn-primary'

@@ -17,7 +17,7 @@ Static = function($scope) {
     } else {  $scope.people_uids.push(uid)  };
   };
   
-  $scope.$watch('people_uids', function(newValue, oldValue) {
+  $scope.$watch('people_uids.length', function(newValue, oldValue) {
     setTimeout(function(){
       if (newValue == $scope.people_uids) {
         VK.api("users.get", {uids: $scope.people_uids, fields: "uid, first_name, last_name, nickname, photo, photo_medium, photo_big"}, function(data) {
