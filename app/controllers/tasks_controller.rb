@@ -8,9 +8,9 @@ class TasksController < ApplicationController
   def new_task;     @task = Task.new task_params;  end
   def find_task;    @task = Task.find params[:id];  end
   def create;       @task.save ? redirect_to(@task) : render(:new);  end
-  def update;       @task.update_attributes(task_params) ? redirect_to(@task) : render(:edit);  end
+  def update;       @task.update_attributes(task_params) ? redirect_to(root_url(query: {scope: 'own'})) : render(:edit);  end
   def show;         @task.view!;  end
-  def destroy;      @task.destroy ? redirect_to(root_url) : render(text: 'faild');  end
+  def destroy;      @task.destroy ? redirect_to(root_url(query: {scope: 'own'})) : render(text: 'faild');  end
   
   def json
     render json: {
@@ -25,7 +25,9 @@ class TasksController < ApplicationController
         title: t.title,
         cid: t.cid,
         id: t.id,
-        tags: t.tags
+        tags: t.tags,
+        views_count: t.views_count,
+        references_count: t.references.count
       }}
     }.to_json
   end

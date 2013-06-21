@@ -1,9 +1,10 @@
-%div{'ng-controller' => 'Static'}
-  = render 'tasks/units/task', task: @task
+= render 'tasks/units/task', task: @task
 
+- if current_person_uid == @task.requester_uid
   - unless @task.references.blank?
     %p.lead Рекоммендации
   - @task.references.each do |reference|
     = render 'references/units/reference', reference: reference
-    %hr
-  = render 'layouts/back'
+    
+%hr
+= render 'layouts/back'

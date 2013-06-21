@@ -23,7 +23,7 @@
     = form.label :description, 'Описание'
     = form.text_area :description, rows: 6, class: 'span12'
     
-    = form.label :tag_list, 'Список тегов'
+    = form.label :tag_list, 'Добавить тег'
     %div{'ng-controller' => 'TagInput', 'ng-init' => "loadTags(#{tag_list.to_json})"}
       = form.hidden_field :tag_list, value: "{{selectedTags.join()}}"
       .span12{'ng-init' => "selectedTags = #{task.tags}"}
@@ -41,4 +41,4 @@
 
   .form-actions
     = form.submit 'Опубликовать', class: 'btn btn-primary'
-    = link_to 'Отмена', (action_name == 'new') ? root_url : task_path(task), class: 'btn'
+    = link_to 'Отмена', root_url(query: {scope: 'own'}), class: 'btn'

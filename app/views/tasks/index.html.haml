@@ -6,31 +6,55 @@
     .pull-right= link_to 'Добавить объявление', new_task_path, class: 'btn btn-primary'
     %p.lead{"ng-init" => "scope = 'own'"} Мои объявления
 
-  %div
-    %a.row-fluid.task{"ng-repeat" => "task in tasks", "href" => "/tasks/{{task.id.$oid}}"}
-      .span2
-        %img{src: "{{person(task.requester_uid).photo_big}}"}
-      .span10
-        %ul.inline.pull-right
-          %li
-            %i.icon-map-marker
-            {{city(task.cid).name}}
-        %ul.inline
-          %li
-            {{person(task.requester_uid).first_name}}
-            {{person(task.requester_uid).nickname}}
-            {{person(task.requester_uid).last_name}}
-          %li
-            %i.icon-time
-            {{task.time}}
-          %li
-            %i.icon-calendar
-            {{task.date}}
-        %ul.inline
-          %li
-            %p.lead {{task.title}}
-        %ul.inline.tags-cloud
-          %li.tag{'ng-repeat' => 'tag in task.tags'} {{tag}}
+  - if scope != 'own'
+    %div
+      %a.row-fluid.task{"ng-repeat" => "task in tasks", "href" => "/tasks/{{task.id.$oid}}"}
+        .span2
+          %img{src: "{{person(task.requester_uid).photo_big}}"}
+        .span10
+          %ul.inline.pull-right
+            %li
+              %i.icon-map-marker
+              {{city(task.cid).name}}
+          %ul.inline
+            %li
+              {{person(task.requester_uid).first_name}}
+              {{person(task.requester_uid).nickname}}
+              {{person(task.requester_uid).last_name}}
+            %li
+              %i.icon-time
+              {{task.time}}
+            %li
+              %i.icon-calendar
+              {{task.date}}
+          %ul.inline
+            %li
+              %p.lead {{task.title}}
+          %ul.inline.tags-cloud
+            %li.tag{'ng-repeat' => 'tag in task.tags'} {{tag}}
+  - else
+    %div{"ng-repeat" => "task in tasks"}
+      .row-fluid
+        .span6
+          %a{"href" => "/tasks/{{task.id.$oid}}"}
+            %h5 {{task.title}}
+        .span2.text-center
+          %i.icon-eye-open
+          %br
+          Просмотров {{task.views_count}}
+        .span2.text-center
+          %i.icon-user
+          %br
+          Рекомендаций {{task.references_count}}
+        .span1
+          %a.btn{"href" => "/tasks/{{task.id.$oid}}/edit"}
+            %i.icon-edit
+        .span1
+          %form{"action" => "/tasks/{{task.id.$oid}}", "method" => "post"}
+            %input{"type" => "hidden", "value" => "delete", "name" => "_method"}
+            %input.btn.btn-danger{"type" => "submit", "value" => "X"}
+      %hr
+
   = render 'tasks/units/pager'
   
   - if scope == 'own'
