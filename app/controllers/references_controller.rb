@@ -8,9 +8,20 @@ class ReferencesController < ApplicationController
   def find_reference;   @reference = Reference.find params[:id];  end
   def find_references;  @references = Reference.all;  end
   def find_task;        @task = (@reference.task if @reference) || Task.find(params[:task_id]);  end
-  def create;           @reference.save ? redirect_to(@task) : render(:new);  end
-  def update;           @reference.update_attributes(reference_params) ? redirect_to(@task) : render(:edit);  end
-  def destroy;          @reference.destroy ? redirect_to(@task) : render(text: 'faild');  end
+  
+  # def update;           @reference.update_attributes(reference_params) ? redirect_to(@task) : render(:edit);  end
+  # def destroy;          @reference.destroy ? redirect_to(@task) : render(text: 'faild');  end
+  
+  def create
+    if @reference.save
+      redirect_to @task, :notice => {
+        referenced_uid: @reference.referenced_uid,
+        message: "Рекомендация успешно размещена"
+      }
+    else
+      render :new
+    end
+  end
   
   def reference_params
     unless params[:reference].blank?
