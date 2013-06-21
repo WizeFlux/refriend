@@ -1,4 +1,4 @@
-.pager
+.pager{"ng-show" => "pages > 1"}
   %li{"ng-class" => "disabledIf(page == 1)"}
     %a{"href" => "#", "ng-click" => "pageDown()"} Предидущая
   %li Страница {{page}} из {{pages}}
