@@ -1,5 +1,5 @@
 %center
-  = link_to 'Рекоммендовать себя', new_task_reference_path(task, recommended: 'self'), class: ('btn btn-primary' + active_if(params[:recommended] == 'self'))
-  = link_to 'Рекоммендовать друга', new_task_reference_path(task, recommended: 'friend'), class: ('btn btn-primary' + active_if(params[:recommended] == 'friend'))
+  = link_to 'Рекомендовать себя', new_task_reference_path(task, recommended: 'self'), class: ('btn btn-primary' + active_if(params[:recommended] == 'self'))
+  = link_to 'Рекомендовать друга', new_task_reference_path(task, recommended: 'friend'), class: ('btn btn-primary' + active_if(params[:recommended] == 'friend'))
   / %a.btn.btn-primary{"href" => "#", "onclick" => ""}
   %br  
