@@ -10,7 +10,7 @@
 
 - if current_person_uid == @task.requester_uid
   - unless @task.references.blank?
-    %p.lead Рекоммендации
+    %p.lead Рекомендации
   - @task.references.each do |reference|
     = render 'references/units/reference', reference: reference
     
