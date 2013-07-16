@@ -1,3 +1,5 @@
+ADMIN_UIDS = ['68535', "17177988"]
+
 VkontakteApi.configure do |config|
   config.app_id = '3694478'
   config.app_secret = 'WL2lNvFkQscDTYoJPdif'

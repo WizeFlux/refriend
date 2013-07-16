@@ -23,6 +23,14 @@
     = form.label :description, 'Описание'
     = form.text_area :description, rows: 6, class: 'span12'
     
+    - if admin?
+      = form.label :requester_uid, 'Id владельца объявления'
+      = form.text_field :requester_uid, class: 'span12', value: (task.requester_uid || current_person_uid)
+    - else
+      = form.hidden_field :requester_uid, value: current_person_uid
+    
+    
+    
     = form.label :tag_list, 'Добавить тег'
     %div{'ng-controller' => 'TagInput', 'ng-init' => "loadTags(#{tag_list.to_json})"}
       = form.hidden_field :tag_list, value: "{{selectedTags.join()}}"

@@ -1,9 +1,13 @@
 class ApplicationController < ActionController::Base
   before_filter :set_headers, :current_person_uid, :current_person_cid
   protect_from_forgery with: :exception
-  helper_method :current_person_uid, :current_person_cid
+  helper_method :current_person_uid, :current_person_cid, :admin?
   
   
+  
+  def admin?
+    ::ADMIN_UIDS.include? current_person_uid
+  end
   
   def set_headers
     response.headers.delete('X-Frame-Options')

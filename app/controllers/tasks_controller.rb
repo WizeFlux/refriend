@@ -54,9 +54,7 @@ class TasksController < ApplicationController
       params.require(
         :task
       ).permit(
-        :title, :description, :tag_list, :cid
-      ).merge(
-        requester_uid: current_person_uid
+        :title, :description, :tag_list, :cid, :requester_uid
       )
     end
   end
