@@ -27,7 +27,6 @@ QueryForm = function($scope, $http) {
       $scope.tasks = data.tasks;
       $scope.pages = data.pagination.pages;
       $scope.page = data.pagination.page;
-      setTimeout(function(){  $scope.$parent.$eval('adjustIframeSize()')  }, 100)
     });
   };
   
