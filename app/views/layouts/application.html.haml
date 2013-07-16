@@ -7,12 +7,7 @@
     %script{src: "http://vk.com/js/api/xd_connection.js?2", type: "text/javascript"}
     %link{href: 'http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic-ext,cyrillic', rel: 'stylesheet', type: 'text/css'}
     :javascript
-      VK.init(function() {
-        setTimeout(function(){
-          VK.callMethod("resizeWindow", 800, document.height); 
-        }, 2500)
-      });
       currentPersonUid = "#{current_person_uid}";
-%body{'ng-controller' => 'Static'}
-  .container-fluid
-    = yield
+  %body{'ng-controller' => 'Static'}
+    .container-fluid
+      = yield
